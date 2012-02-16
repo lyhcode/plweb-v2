@@ -1,7 +1,6 @@
 package org.plweb.suite.common.xml;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -18,7 +17,7 @@ public class XTask {
 	/**
 	 * Temporary Attributes for runtime variables
 	 */
-	private Map<String, Object> tempAttributes = new HashMap<String, Object>();
+	private Map<String, Object> tempAttributes = new TreeMap<String, Object>();
 
 	public Object getTempAttribute(String key) {
 		return tempAttributes.get(key);

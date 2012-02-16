@@ -4,9 +4,9 @@
 
 <DOCKABLES>
     <DOCKABLE NAME="compiler">
-        new plweb.suite.jedit.plugin.compiler.CompilerUserInterface();
+        new org.plweb.suite.jedit.plugin.compiler.CompilerUserInterface();
     </DOCKABLE>
     <DOCKABLE NAME="infoviewer">
-        new plweb.suite.jedit.plugin.compiler.BrowserUserInterface();
+        new org.plweb.suite.jedit.plugin.compiler.BrowserUserInterface();
     </DOCKABLE>
 </DOCKABLES>

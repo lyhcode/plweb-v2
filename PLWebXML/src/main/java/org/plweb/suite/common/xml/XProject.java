@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class XProject {
 
@@ -17,7 +18,7 @@ public class XProject {
 
 	private List<XTask> tasks = new ArrayList<XTask>();
 
-	private Map<String, String> properties = new HashMap<String, String>();
+	private Map<String, String> properties = new TreeMap<String, String>();
 
 	private String rootPath;
 

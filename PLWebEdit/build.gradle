@@ -34,7 +34,6 @@ def defaultEncoding = 'UTF-8'
 [compileGroovy, compileTestGroovy]*.options*.encoding = defaultEncoding
 [compileGroovy, compileTestGroovy]*.groovyOptions*.encoding = defaultEncoding
 
-
 // Package Fat Jar
 jar.baseName = 'plwebedit'
 
