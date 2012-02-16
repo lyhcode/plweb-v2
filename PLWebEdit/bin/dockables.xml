@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE DOCKABLES SYSTEM "dockables.dtd">
+
+<DOCKABLES>
+    <DOCKABLE NAME="compiler">
+        new plweb.suite.jedit.plugin.compiler.CompilerUserInterface();
+    </DOCKABLE>
+    <DOCKABLE NAME="infoviewer">
+        new plweb.suite.jedit.plugin.compiler.BrowserUserInterface();
+    </DOCKABLE>
+</DOCKABLES>
