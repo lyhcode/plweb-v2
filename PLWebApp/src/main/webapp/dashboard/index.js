@@ -91,7 +91,7 @@ function ajax_load_state(class_id, course_id, lesson_id) {
 	$('div.html-lesson-state').html('<img src="img/ajax-loader-1.gif"/>');
 	
 	$.ajax({
-		url : 'panel.lesson/ajax_load_state.groovy',
+		url : 'dashboard/ajax_load_state.groovy',
 		type : 'POST',
 		data: { 
 			class_id:	class_id,

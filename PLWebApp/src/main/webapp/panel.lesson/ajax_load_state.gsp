@@ -1,1 +1,0 @@
-<%helper=request.get('helper')%>

@@ -1,9 +1,10 @@
-org.plweb.suite.jedit.plugin.compiler.CompilerPlugin.activate=startup
-org.plweb.suite.jedit.plugin.compiler.CompilerPlugin.name=PLWeb Compiler Plugin
-org.plweb.suite.jedit.plugin.compiler.CompilerPlugin.version=1.0
-org.plweb.suite.jedit.plugin.compiler.CompilerPlugin.author=lyhcode
-org.plweb.suite.jedit.plugin.compiler.CompilerPlugin.depend.0=jdk 1.5
-org.plweb.suite.jedit.plugin.compiler.CompilerPlugin.depend.1=jedit 04.02.01.00
+plugin.org.plweb.jedit.CompilerPlugin.name=PLWebEdit
+plugin.org.plweb.jedit.CompilerPlugin.description=PLWeb Editor Plugin
+plugin.org.plweb.jedit.CompilerPlugin.author=lyhcode
+plugin.org.plweb.jedit.CompilerPlugin.activate=startup
+plugin.org.plweb.jedit.CompilerPlugin.version=1.0
+plugin.org.plweb.jedit.CompilerPlugin.depend.0=jdk 1.5
+plugin.org.plweb.jedit.CompilerPlugin.depend.1=jedit 04.04.01.00
 
 infoviewer.title=Info
 infoviewer.dock-position=left

@@ -53,9 +53,11 @@
 		</div>
 	</div>
 	
-	<div class="lesson-state-panel">
+	<h2>學習狀態</h2>
+	<div class="lesson-state-panel" style="width:560px;height:160px;margin:5px;">
 		<div class="html-lesson-state"><img src="img/ajax-loader-1.gif"/></div>
 	</div>
+
 	<div class="html-content-string"><div class="prettyhtml">${helper.attr('html_text')}</div></div>
 
 </div>

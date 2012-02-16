@@ -1,6 +1,4 @@
-########## Default Properties (Start) ##########
-
-lookAndFeel=com.sun.java.swing.plaf.windows.WindowsLookAndFeel
+#lookAndFeel=com.sun.java.swing.plaf.windows.WindowsLookAndFeel
 backups=0
 
 buffer.indentSize=4
@@ -30,17 +28,18 @@ search.beanshell.toggle=false
 
 tip.show=false
 
-view.antiAlias=false
 view.caretColor=\#000000
 view.context=cut copy paste paste-previous paste-deleted - to-upper to-lower
 view.eolMarkers=false
 view.eolMarkerColor=\#999999
 view.extendedState=0
-view.font=DialogInput
-view.fontsize=15
-view.fracFontMetrics=false
+#view.font=DialogInput
+view.font=Monospaced
+view.fontsize=16
+view.fracFontMetrics=true
+view.antiAlias=standard
 view.gutter.font=DialogInput
-view.gutter.fontsize=15
+view.gutter.fontsize=16
 view.gutter.lineNumbers=true
 view.width=1000
 view.height=600

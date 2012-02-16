@@ -1,9 +1,10 @@
 package org.plweb.suite.webstart;
 
+import java.awt.Font;
 import java.io.File;
+import java.net.URL;
 
 import org.gjt.sp.jedit.EditBus;
-import org.gjt.sp.jedit.GUIUtilities;
 import org.gjt.sp.jedit.jEdit;
 
 /**
@@ -38,7 +39,26 @@ public class jEditLoader {
         };
 
 		jEdit.main(args);
-
+		
+		// Load DroidSansMono for Mac OS X only
+		if (System.getProperty("os.name").startsWith("Mac")) {
+			try {
+				URL fonturl = this.getClass().getResource("DroidSansMono.ttf");
+				if (fonturl!=null) {
+					Font font = Font.createFont(Font.TRUETYPE_FONT, fonturl.openStream());
+					font.deriveFont(Font.PLAIN, 16);
+					jEdit.setFontProperty("view.font", font);
+					jEdit.setIntegerProperty("view.fontsize", 16);
+					jEdit.setBooleanProperty("view.fracFontMetrics", true);
+					jEdit.setProperty("view.antiAlias", "standard");
+				}
+			}
+			catch (Exception ex) {
+				System.err.println("Could not load DroidSansMono.");
+				ex.printStackTrace();
+			}
+		}
+		
 		EBComponentImpl ebcomp = new EBComponentImpl();
 		
 		ebcomp.setMenubarVisible(menubarVisible);

@@ -68,7 +68,7 @@ task deploy(dependsOn: 'jar') << {
 
 task sync(type:Exec) {
     workingDir '.'
-    commandLine 's3cmd', 'sync', './plwebstart', 's3://cdn.plweb.org/'
+    commandLine 's3cmd', '-P', 'sync', './plwebstart', 's3://cdn.plweb.org/'
 }
 
 defaultTasks 'deploy'
