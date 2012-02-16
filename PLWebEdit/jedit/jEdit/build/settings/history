@@ -1,0 +1,10 @@
+[vfs.browser.path]
+/Users/lyhcode
+[vfs.browser.filter]
+*\[^~#\]
+[action]
+global-options
+plugin-manager
+vfs.browser
+quicknotepad
+open-file

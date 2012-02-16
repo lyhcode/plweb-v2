@@ -1,0 +1,31 @@
+plugin.plweb.suite.jedit.plugin.compiler.CompilerPlugin.activate=startup
+plugin.plweb.suite.jedit.plugin.compiler.CompilerPlugin.name=PLWeb Compiler Plugin
+plugin.plweb.suite.jedit.plugin.compiler.CompilerPlugin.version=1.0
+plugin.plweb.suite.jedit.plugin.compiler.CompilerPlugin.author=Yan-hong Lin
+plugin.plweb.suite.jedit.plugin.compiler.CompilerPlugin.depend.0=jdk 1.5
+plugin.plweb.suite.jedit.plugin.compiler.CompilerPlugin.depend.1=jedit 04.02.01.00
+
+infoviewer.title=Infoviewer
+
+compiler.label=Compile
+compiler-interrupt.label=Interrupt
+compiler-run.label=Run
+
+compiler.title=Message Console
+
+compiler.msg0.0=Running... (%s)
+compiler.msg0.1=Stop... (%s)
+
+compiler.dialog0.title=Error!
+compiler.dialog0.message=Interrupt the current program first!
+compiler.dialog1.title=Error!
+compiler.dialog1.message=No program is running!
+
+compiler.dock-position=bottom
+compiler.extendedState=0
+infoviewer.dock-position=left
+infoviewer.extendedState=0
+
+compiler-run.icon=jeditresource:/plwebedit-1.0.jar!/compiler-run.png
+compiler-interrupt.icon=jeditresource:/plwebedit-1.0.jar!/compiler-interrupt.png
+

@@ -1,0 +1,150 @@
+Log file created on Thu Feb 16 13:32:28 CST 2012
+IMPORTANT:
+Because updating this file after every log message would kill
+performance, it will be *incomplete* unless you invoke the
+Utilities->Troubleshooting->Update Activity Log on Disk command!
+下午 01:32:27 [main] [message] Log: When reporting bugs, please include the following information:
+下午 01:32:27 [main] [message] Log: java.version=1.6.0_29
+下午 01:32:27 [main] [message] Log: java.vm.version=20.4-b02-402
+下午 01:32:27 [main] [message] Log: java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+下午 01:32:27 [main] [message] Log: java.runtime.version=1.6.0_29-b11-402-10M3527
+下午 01:32:27 [main] [message] Log: java.runtime.name=Java(TM) SE Runtime Environment
+下午 01:32:27 [main] [message] Log: java.vendor=Apple Inc.
+下午 01:32:27 [main] [message] Log: java.compiler=null
+下午 01:32:27 [main] [message] Log: os.name=Mac OS X
+下午 01:32:27 [main] [message] Log: os.version=10.6.8
+下午 01:32:27 [main] [message] Log: os.arch=x86_64
+下午 01:32:27 [main] [message] Log: user.home=/Users/lyhcode
+下午 01:32:27 [main] [message] Log: java.home=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+下午 01:32:27 [main] [message] Log: java.class.path=/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jedit.jar
+下午 01:32:27 [main] [message] jEdit: starting with command line arguments: -settings=/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings
+下午 01:32:28 [main] [debug] MiscUtilities: Saving backup of file "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/activity.log" to "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/settings-backup/activity.log~1~"
+下午 01:32:28 [main] [notice] jEdit: jEdit version 4.5
+下午 01:32:28 [main] [message] jEdit: Settings directory is /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings
+下午 01:32:28 [main] [message] jEdit: jEdit home directory is /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build
+下午 01:32:28 [main] [debug] SplashScreen: init:23ms
+下午 01:32:28 [main] [debug] SplashScreen: init system properties:38ms
+下午 01:32:28 [main] [message] BeanShell: Beanshell Init
+下午 01:32:28 [main] [debug] SplashScreen: init beanshell:43ms
+下午 01:32:28 [main] [debug] SplashScreen: loading site properties:4ms
+下午 01:32:28 [main] [debug] SplashScreen: loading user properties:3ms
+下午 01:32:28 [main] [debug] GUIUtilities: Icon theme set to: tango
+下午 01:32:28 [main] [debug] GUIUtilities: Loading icon theme from: jeditresource:/org/gjt/sp/jedit/icons/themes/tango/
+下午 01:32:28 [main] [debug] SplashScreen: init GUI:8ms
+下午 01:32:28 [main] [debug] EditServer: jEdit server started on port 60167
+下午 01:32:28 [main] [debug] EditServer: Authorization key is 1019642694
+下午 01:32:28 [main] [debug] SplashScreen: init server:32ms
+下午 01:32:28 [main] [debug] SplashScreen: init look and feel:8ms
+下午 01:32:28 [main] [debug] SplashScreen: init VFS Manager:4ms
+下午 01:32:28 [main] [debug] ActionSet: Loading actions from jar:file:/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jedit.jar!/org/gjt/sp/jedit/actions.xml
+下午 01:32:29 [main] [debug] DockableWindowManager: Loading dockables from jar:file:/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jedit.jar!/org/gjt/sp/jedit/dockables.xml
+下午 01:32:29 [AWT-EventQueue-0] [debug] EditBus: SearchSettingsChanged[source=null]
+下午 01:32:29 [main] [debug] SplashScreen: init resources:149ms
+下午 01:32:29 [main] [notice] jEdit: Loading plugins from /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jars
+下午 01:32:29 [AWT-EventQueue-0] [debug] EditBus: PluginUpdate[what=LOADED,exit=false,version=1.2,source=/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jars/MacOSX.jar,class=macosx.MacOSXPlugin]
+下午 01:32:29 [AWT-EventQueue-0] [debug] EditBus: PluginUpdate[what=LOADED,exit=false,version=4.4,source=/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jars/QuickNotepad.jar,class=QuickNotepadPlugin]
+下午 01:32:29 [main] [notice] jEdit: Loading plugins from /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/jars
+下午 01:32:29 [main] [debug] SplashScreen: init plugins:18ms
+下午 01:32:29 [main] [message] HistoryModel: Loading history
+下午 01:32:29 [main] [debug] SplashScreen: init history model:4ms
+下午 01:32:29 [main] [message] BufferHistory: Loading /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/recent.xml
+下午 01:32:29 [main] [debug] SplashScreen: init buffer history:6ms
+下午 01:32:29 [main] [message] KillRing: Loading /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/killring.xml
+下午 01:32:29 [main] [debug] SplashScreen: init killring:8ms
+下午 01:32:29 [main] [debug] jEdit: SOCKS proxy disabled
+下午 01:32:29 [main] [debug] jEdit: HTTP proxy disabled
+下午 01:32:29 [AWT-EventQueue-0] [debug] EditBus: PropertiesChanged[source=null]
+下午 01:32:29 [main] [debug] SplashScreen: init various properties:150ms
+下午 01:32:29 [main] [message] jEdit: Loading mode catalog file /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/modes/catalog
+下午 01:32:29 [main] [message] jEdit: Loading mode catalog file /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/modes/catalog
+下午 01:32:29 [main] [debug] SplashScreen: init modes:98ms
+下午 01:32:29 [main] [debug] PluginJAR: Activating macosx.MacOSXPlugin because of startup
+下午 01:32:29 [main] [debug] PluginJAR: Opening /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jars/MacOSX.jar
+下午 01:32:29 [AWT-EventQueue-0] [debug] EditBus: PluginUpdate[what=ACTIVATED,exit=false,version=1.2,source=/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jars/MacOSX.jar,class=macosx.MacOSXPlugin]
+下午 01:32:29 [main] [debug] SplashScreen: activate plugins:42ms
+下午 01:32:29 [main] [debug] Macros: Registered beanshell macro handler
+下午 01:32:29 [AWT-EventQueue-0] [debug] EditBus: DynamicMenuChanged[menu=macros,source=null]
+下午 01:32:29 [main] [message] BeanShell: Running script /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/startup/startup.bsh
+下午 01:32:29 [main] [notice] jEdit$3: Loading edit mode /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/modes/java.xml
+下午 01:32:29 [main] [notice] jEdit$3: Loading edit mode /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/modes/xml.xml
+下午 01:32:29 [main] [notice] jEdit$3: Loading edit mode /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/modes/xml.xml
+下午 01:32:29 [main] [debug] String: BeanShell interpreter version 2.0b4-jedit
+下午 01:32:29 [main] [debug] SplashScreen: init macros:382ms
+下午 01:32:29 [main] [debug] SplashScreen: run startup scripts:4ms
+下午 01:32:29 [main] [debug] SplashScreen: run startup scripts:9ms
+下午 01:32:29 [AWT-EventQueue-0] [message] PerspectiveManager: Loading /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/perspective.xml
+下午 01:32:29 [AWT-EventQueue-0] [notice] jEdit$3: Loading edit mode /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/modes/text.xml
+下午 01:32:29 [AWT-EventQueue-0] [debug] EditBus: BufferUpdate[what=PROPERTIES_CHANGED,view=null,source=Untitled-1 (~/)]
+下午 01:32:29 [AWT-EventQueue-0] [debug] EditBus: BufferUpdate[what=CREATED,view=null,source=Untitled-1 (~/)]
+下午 01:32:29 [AWT-EventQueue-0] [debug] EditBus: BufferUpdate[what=LOAD_STARTED,view=null,source=Untitled-1 (~/)]
+下午 01:32:29 [AWT-EventQueue-0] [debug] EditBus: BufferUpdate[what=LOADED,view=null,source=Untitled-1 (~/)]
+下午 01:32:30 [AWT-EventQueue-0] [debug] BufferSet: 1189961117: addBufferSetListener org.gjt.sp.jedit.EditPane[inactive]
+下午 01:32:30 [AWT-EventQueue-0] [debug] EditBus: BufferChanging[what=BUFFER_CHANGING,source=org.gjt.sp.jedit.EditPane[inactive]]
+下午 01:32:30 [AWT-EventQueue-0] [debug] BufferSet: 1189961117 addBufferAt(Untitled-1 (~/),-1)
+下午 01:32:30 [AWT-EventQueue-0] [debug] BufferSet: 1189961117: Buffer added Untitled-1 (~/) at 0
+下午 01:32:30 [AWT-EventQueue-0] [debug] EditBus: EditPaneUpdate[what=CREATED,source=org.gjt.sp.jedit.EditPane[inactive]]
+下午 01:32:30 [AWT-EventQueue-0] [debug] BufferSet: 1189961117 addBufferAt(Untitled-1 (~/),0)
+下午 01:32:30 [AWT-EventQueue-0] [debug] EditBus: ViewUpdate[what=CREATED,source=org.gjt.sp.jedit.View[active]]
+下午 01:32:30 [AWT-EventQueue-0] [debug] MacOSXPlugin: Dirty buffer found? false for 1 buffers
+下午 01:32:31 [AWT-EventQueue-0] [debug] EditBus: EditorStarted[source=null]
+下午 01:32:31 [jEdit I/O #1] [debug] WorkThread: Work request thread starting [jEdit I/O #1]
+下午 01:32:31 [jEdit I/O #2] [debug] WorkThread: Work request thread starting [jEdit I/O #2]
+下午 01:32:31 [jEdit I/O #3] [debug] WorkThread: Work request thread starting [jEdit I/O #3]
+下午 01:32:31 [jEdit I/O #4] [debug] WorkThread: Work request thread starting [jEdit I/O #4]
+下午 01:32:31 [AWT-EventQueue-0] [message] jEdit: Startup complete
+下午 01:32:31 [AWT-EventQueue-0] [debug] EditBus: ViewUpdate[what=VIEW_ACTIVATED,source=org.gjt.sp.jedit.View[active]]
+下午 01:32:31 [AWT-EventQueue-0] [debug] MacOSXPlugin: Dirty buffer found? false for 1 buffers
+下午 01:32:31 [AWT-EventQueue-0] [debug] DockableWindowManager: Loading dockables from jeditresource:/QuickNotepad.jar!/dockables.xml
+下午 01:32:31 [AWT-EventQueue-0] [debug] PluginJAR: Opening /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jars/QuickNotepad.jar
+下午 01:32:31 [AWT-EventQueue-0] [debug] EditBus: DockableWindowUpdate[what=ACTIVATED,dockable=quicknotepad,source=org.gjt.sp.jedit.gui.DockableWindowManagerImpl[,0,0,1043x581,invalid,layout=org.gjt.sp.jedit.gui.DockableLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]]
+下午 01:32:31 [AWT-EventQueue-0] [debug] JEditTextArea: InputMethodSupport is activated
+下午 01:32:31 [AWT-EventQueue-0] [debug] EditBus: PluginUpdate[what=ACTIVATED,exit=false,version=4.4,source=/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jars/QuickNotepad.jar,class=QuickNotepadPlugin]
+下午 01:32:40 [AWT-EventQueue-0] [debug] EditBus: PropertiesChanging[source=null]
+下午 01:32:59 [AWT-EventQueue-0] [debug] MiscUtilities: Saving backup of file "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/perspective.xml" to "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/settings-backup/perspective.xml~1~"
+下午 01:33:00 [AWT-EventQueue-0] [debug] ActionSet: Loading actions from jeditresource:/QuickNotepad.jar!/actions.xml
+下午 01:33:18 [AWT-EventQueue-0] [warning] GUIUtilities: showVFSFileDialog(): given null view, assuming jEdit.getActiveView()
+下午 01:33:18 [AWT-EventQueue-0] [debug] ActionSet: Loading actions from jar:file:/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jedit.jar!/org/gjt/sp/jedit/browser.actions.xml
+下午 01:33:52 [AWT-EventQueue-0] [debug] EditBus: PropertiesChanging[source=null]
+下午 01:33:53 [AWT-EventQueue-0] [debug] EditBus: EditorExitRequested[source=org.gjt.sp.jedit.View[active]]
+下午 01:33:53 [AWT-EventQueue-0] [message] PerspectiveManager: Saving /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/perspective.xml
+下午 01:33:53 [AWT-EventQueue-0] [debug] MiscUtilities: Saving backup of file "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/perspective.xml" to "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/settings-backup/perspective.xml~1~"
+下午 01:33:53 [AWT-EventQueue-0] [debug] BufferSet: 1189961117: Buffer removed Untitled-1 (~/)
+下午 01:33:53 [AWT-EventQueue-0] [debug] EditBus: BufferUpdate[what=PROPERTIES_CHANGED,view=null,source=Untitled-1 (~/)]
+下午 01:33:53 [AWT-EventQueue-0] [debug] MacOSXPlugin: Dirty buffer found? false for 1 buffers
+下午 01:33:53 [AWT-EventQueue-0] [debug] EditBus: BufferUpdate[what=CREATED,view=null,source=Untitled-1 (~/)]
+下午 01:33:53 [AWT-EventQueue-0] [debug] MacOSXPlugin: Dirty buffer found? false for 1 buffers
+下午 01:33:53 [AWT-EventQueue-0] [debug] EditBus: BufferUpdate[what=LOAD_STARTED,view=null,source=Untitled-1 (~/)]
+下午 01:33:53 [AWT-EventQueue-0] [debug] MacOSXPlugin: Dirty buffer found? false for 1 buffers
+下午 01:33:53 [AWT-EventQueue-0] [debug] EditBus: BufferUpdate[what=LOADED,view=null,source=Untitled-1 (~/)]
+下午 01:33:53 [AWT-EventQueue-0] [debug] MacOSXPlugin: Dirty buffer found? false for 1 buffers
+下午 01:33:53 [AWT-EventQueue-0] [debug] BufferSet: 1189961117 addBufferAt(Untitled-1 (~/),-1)
+下午 01:33:53 [AWT-EventQueue-0] [debug] BufferSet: 1189961117: Buffer added Untitled-1 (~/) at 0
+下午 01:33:53 [AWT-EventQueue-0] [debug] EditBus: BufferChanging[what=BUFFER_CHANGING,source=org.gjt.sp.jedit.EditPane[active]]
+下午 01:33:53 [AWT-EventQueue-0] [debug] EditBus: EditPaneUpdate[what=BUFFER_CHANGED,source=org.gjt.sp.jedit.EditPane[active]]
+下午 01:33:53 [AWT-EventQueue-0] [debug] EditBus: BufferUpdate[what=CLOSED,view=org.gjt.sp.jedit.View[active],source=Untitled-1 (~/)]
+下午 01:33:53 [AWT-EventQueue-0] [debug] MacOSXPlugin: Dirty buffer found? false for 1 buffers
+下午 01:33:53 [AWT-EventQueue-0] [debug] EditBus: ViewUpdate[what=CLOSED,source=org.gjt.sp.jedit.View[active]]
+下午 01:33:53 [AWT-EventQueue-0] [debug] MacOSXPlugin: Dirty buffer found? false for 1 buffers
+下午 01:33:53 [AWT-EventQueue-0] [debug] EditBus: EditPaneUpdate[what=DESTROYED,source=org.gjt.sp.jedit.EditPane[active]]
+下午 01:33:53 [AWT-EventQueue-0] [debug] BufferSet: 1189961117: Buffer removed Untitled-1 (~/)
+下午 01:33:53 [AWT-EventQueue-0] [debug] BufferSetManager: Buffer:Untitled-1 (~/) is in no bufferSet anymore, closing it
+下午 01:33:53 [AWT-EventQueue-0] [debug] EditBus: BufferUpdate[what=CLOSING,view=null,source=Untitled-1 (~/)]
+下午 01:33:53 [AWT-EventQueue-0] [debug] MacOSXPlugin: Dirty buffer found? false for 1 buffers
+下午 01:33:53 [AWT-EventQueue-0] [debug] EditBus: BufferUpdate[what=CLOSED,view=null,source=Untitled-1 (~/)]
+下午 01:33:53 [AWT-EventQueue-0] [debug] MacOSXPlugin: Dirty buffer found? false for 1 buffers
+下午 01:33:53 [AWT-EventQueue-0] [message] BufferHistory: Saving /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/recent.xml
+下午 01:33:53 [AWT-EventQueue-0] [debug] MiscUtilities: Saving backup of file "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/recent.xml" to "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/settings-backup/recent.xml~1~"
+下午 01:33:53 [AWT-EventQueue-0] [message] KillRing: Saving /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/killring.xml
+下午 01:33:53 [AWT-EventQueue-0] [debug] MiscUtilities: Saving backup of file "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/killring.xml" to "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/settings-backup/killring.xml~1~"
+下午 01:33:53 [AWT-EventQueue-0] [debug] MiscUtilities: Saving backup of file "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/properties" to "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/settings-backup/properties~1~"
+下午 01:54:03 [AWT-EventQueue-0] [debug] EditBus: EditorExitRequested[source=null]
+下午 01:54:03 [AWT-EventQueue-0] [debug] EditBus: EditorExiting[source=null]
+下午 01:54:03 [AWT-EventQueue-0] [debug] EditBus: PluginUpdate[what=DEACTIVATED,exit=true,version=1.2,source=/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jars/MacOSX.jar,class=macosx.MacOSXPlugin]
+下午 01:54:03 [AWT-EventQueue-0] [debug] EditBus: PluginUpdate[what=UNLOADED,exit=true,version=1.2,source=/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jars/MacOSX.jar,class=macosx.MacOSXPlugin]
+下午 01:54:03 [AWT-EventQueue-0] [debug] EditBus: PluginUpdate[what=DEACTIVATED,exit=true,version=4.4,source=/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jars/QuickNotepad.jar,class=QuickNotepadPlugin]
+下午 01:54:03 [AWT-EventQueue-0] [debug] EditBus: PluginUpdate[what=UNLOADED,exit=true,version=4.4,source=/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/jars/QuickNotepad.jar,class=QuickNotepadPlugin]
+下午 01:54:03 [AWT-EventQueue-0] [message] BufferHistory: Saving /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/recent.xml
+下午 01:54:03 [AWT-EventQueue-0] [debug] MiscUtilities: Saving backup of file "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/recent.xml" to "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/settings-backup/recent.xml~1~"
+下午 01:54:03 [AWT-EventQueue-0] [message] KillRing: Saving /Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/killring.xml
+下午 01:54:03 [AWT-EventQueue-0] [debug] MiscUtilities: Saving backup of file "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/killring.xml" to "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/settings-backup/killring.xml~1~"
+下午 01:54:03 [AWT-EventQueue-0] [debug] MiscUtilities: Saving backup of file "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/properties" to "/Users/lyhcode/project/plweb-v2/PLWebEdit/jedit/jEdit/build/settings/settings-backup/properties~1~"

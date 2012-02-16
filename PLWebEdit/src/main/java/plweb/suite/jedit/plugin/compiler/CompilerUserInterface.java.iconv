@@ -1,0 +1,121 @@
+package plweb.suite.jedit.plugin.compiler;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.URL;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.JToolBar;
+
+import org.gjt.sp.jedit.Buffer;
+import org.gjt.sp.jedit.GUIUtilities;
+import org.gjt.sp.jedit.View;
+import org.gjt.sp.jedit.jEdit;
+import org.plweb.suite.common.xml.XProject;
+import org.plweb.suite.common.xml.XTask;
+
+import chrriis.dj.nativeswing.components.HTMLEditorListener;
+import chrriis.dj.nativeswing.components.HTMLEditorSaveEvent;
+import chrriis.dj.nativeswing.components.JHTMLEditor;
+import chrriis.dj.nativeswing.components.JWebBrowser;
+
+public class CompilerUserInterface extends JPanel implements ActionListener,
+		HTMLEditorListener {
+
+	private ProjectEnvironment env = ProjectEnvironment.getInstance();
+
+	private static final long serialVersionUID = 3256720676110022706L;
+
+	private CompilerRunner runner;
+
+	private JComboBox comboTask;
+	private JComboBox comboMode;
+
+	private MessageManager mm = MessageManager.getInstance();
+
+	private MessageConsoleInterface console = MessageConsole.getInstance();
+
+	private BufferChangeListener bcl = BufferChangeListener.getInstance();
+
+	public CompilerUserInterface() {
+		setBorder(BorderFactory.createEmptyBorder(5, 5, 3, 3));
+		setLayout(new BorderLayout());
+		setPreferredSize(new Dimension(400, 300));
+
+		JPanel p = new JPanel(new BorderLayout());
+		p.add(createConsoleTextPane(), BorderLayout.CENTER);
+		add(p, BorderLayout.CENTER);
+
+		String[] tasks = {};
+		String[] modes;
+
+		if (env.getLessonMode().equals("author")) {
+			modes = new String[] { "author", "student", "teacher" };
+		} else if (env.getLessonMode().equals("teacher")) {
+			modes = new String[] { "teacher", "student" };
+		} else {
+			modes = new String[] { env.getLessonMode() };
+		}
+
+		JToolBar tb1 = new JToolBar();
+		tb1.setFloatable(false);
+		tb1.add(createButton("previos", "control_rewind.png", "task.previous"));
+		tb1.add(comboTask = createComboBox(tasks, "task.select"));
+		tb1.add(createButton("next", "control_fastforward.png", "task.next"));
+
+		JToolBar tb2 = new JToolBar();
+		tb2.setFloatable(false);
+
+		if (env.getLessonMode().equals("author")) {
+			tb2.add(createButton("upload project", "database_save.png",
+					"project.upload"));
+			tb2.add(new JToolBar.Separator());
+		}
+		tb2.add(comboMode = createComboBox(modes, "mode.select"));
+		tb2.add(new JToolBar.Separator());
+		tb2.add(createButton("reload exercise", "arrow_refresh.png",
+				"task.reload"));
+
+		if (env.getLessonMode().equals("author")) {
+			tb2.add(createButton("open explorer", "drive.png", "explorer.open"));
+
+			tb2.add(createButton("edit project", "book_edit.png",
+					"project.edit"));
+
+			tb2.add(createButton("html editor", "world_edit.png", "html.edit"));
+
+			tb2.add(new JToolBar.Separator());
+
+			tb2.add(createButton("edit exercise", "page_edit.png", "task.edit"));
+			tb2.add(createButton("add exercise", "page_add.png", "task.add"));
+			tb2.add(createButton("delete exercise", "page_delete.png",
+					"task.delete"));
+			tb2.add(createButton("move up exercise", "arrow_up.png", "task.up"));
+			tb2.add(createButton("move down exercise", "arrow_down.png",
+					"task.down"));
+		}
+
+		JPanel p3 = new JPanel(new BorderLayout());
+		p3.add(tb1, BorderLayout.CENTER);
+		p3.add(tb2, BorderLayout.WEST);
+
+		add(p3, BorderLayout.NORTH);
+
+		// 嚙褓殷蕭, 嚙諸決嚙編嚙踝蕭嚙
