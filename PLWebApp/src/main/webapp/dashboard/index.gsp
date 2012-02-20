@@ -4,6 +4,14 @@
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<title>我的課程 - PLWeb 程式設計練習系統 v2.0</title>
+
+	<!-- Compass -->
+	<link href="${helper.basehref}stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="${helper.basehref}stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+	<!--[if IE]>
+	<link href="${helper.basehref}stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<![endif]-->
+
 	${helper.htmlhead()}
 	<link rel="stylesheet" type="text/css" media="screen" href="${helper.basehref}css/jquery.tipsy.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="${helper.basehref}css/colorbox-style1/colorbox.css" />
@@ -17,7 +25,7 @@
 	<script type="text/javascript" src="${helper.basehref}js/jquery.jgrowl_minimized.js"></script>
 	<script type="text/javascript" src="${helper.basehref}dashboard/index.js"></script>
 </head>
-<body class="theme">
+<body class="theme fancy-layout">
 	<div class="page-wrapper">
 		<div class="header">
 			<img class="plweb-logo" src="${helper.basehref}img/plweb_logo.png" alt="PLWeb Logo" />
@@ -49,7 +57,7 @@
 							<span><a href="${helper.basehref}class/index.groovy" class="link-item new-window-link" target="_blank">課程管理</a></span>
 						</li>			
 						<li>
-							<span><a href="course_center.groovy" class="link-item embedded-link">教材管理</a></span>
+							<span><a href="${helper.basehref}course/index.groovy" class="link-item new-window-link" target="_blank">教材管理</a></span>
 						</li>
 						<li>
 							<span><a href="exam/exam.groovy" class="link-item embedded-link">測驗模式</a></span>

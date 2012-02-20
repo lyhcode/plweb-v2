@@ -34,7 +34,7 @@ try {
 	session.setAttribute('alert_message', 'Book added.')
 	
 	//回列表
-	response.sendRedirect('course_center.groovy')
+	response.sendRedirect('index.groovy')
 	
 }
 catch (e) {

@@ -1,18 +1,17 @@
 import groovy.sql.Sql
 import groovy.xml.MarkupBuilder
-import javax.naming.InitialContext
+import org.plweb.webapp.helper.CommonHelper
+
+def helper = new CommonHelper(request, response)
 
 def id    = request.getParameter('id')
 
-def ds = new InitialContext().lookup('java:comp/env/jdbc/plweb')
-def sql = new Sql(ds.connection)
+def sql = new Sql(helper.connection)
 
 row = sql.firstRow('select * from COURSE where COURSE_ID=?', [id])
 id    = row.course_id
 name  = row.course_name
 title = row.course_title
-
-sql.close()
 
 //訊息處理
 error_message = session.getAttribute('error_message')?session.getAttribute('error_message'):''
@@ -23,11 +22,14 @@ session.setAttribute('alert_message', null)
 html.setDoubleQuotes(true)
 html.html {
 	head {
-		title("PLWeb - Content Editing")
-		link (rel:'stylesheet', type:'text/css', href:'default.css', media:'all')
-		script(type:'text/javascript', src:'course_edit.js', '')
+		title("教材設定 - PLWeb")
+		link(href: "${helper.basehref}stylesheets/screen.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/print.css", media: 'print', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<!--[if IE]>')
+		link(href: "${helper.basehref}stylesheets/ie.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<![endif]-->')
 	}
-	body {
+	body (class: 'admin-layout') {
 		if (error_message) {
 			div (class: 'error_message', error_message)
 		}
@@ -35,15 +37,16 @@ html.html {
 			div (class: 'alert_message', alert_message)
 		}
 		
-		h2("Content Editing")
+		h2("教材設定")
+		
+		hr()
 
-		h3("Edit Content Set")
 		form(action:"course_edit_save.groovy", method:"post") {
 			input (type:"hidden", name:"id", value:id)
 			
 			table {
 				tr {
-					th (colspan: 2, 'Basic Settings')
+					th (colspan: 2, '基本設定')
 				}
 				tr {
 					td ('Content ID: ')
@@ -60,8 +63,8 @@ html.html {
 				}
 				tr {
 					td (colspan: 2, align: 'right') {
-						input (type:"submit", value:"Save")
-						input (type:"button", value:"Cancel", onclick: "location.href='course_center.groovy';")
+						input (type:"submit", value: "儲存")
+						input (type:"button", value: "取消", onclick: "location.href='index.groovy';")
 					}
 				}
 			}	

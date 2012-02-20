@@ -1,11 +1,14 @@
+import java.text.NumberFormat
+import java.text.DecimalFormat
 import groovy.sql.Sql
 import groovy.xml.MarkupBuilder
-import javax.naming.InitialContext
-import java.text.NumberFormat
+import org.plweb.webapp.helper.CommonHelper
+
+def helper = new CommonHelper(request, response)
 
 if (!session) {
-	response.sendRedirect('permission_denied.groovy')
-	return;
+	helper.sendError 403
+	return
 }
 
 def uid	  = session.get('uid')
@@ -19,8 +22,7 @@ if (!uid) {
 
 def course_id = request.getParameter('course_id')
 
-def ds = new InitialContext().lookup("java:comp/env/jdbc/plweb")
-def sql = new Sql(ds.connection)
+def sql = new Sql(helper.connection)
 
 row = sql.firstRow('select COURSE_NAME, COURSE_TITLE from COURSE where COURSE_ID=?', [course_id])
 course_name  = row.course_name
@@ -30,7 +32,6 @@ row = sql.firstRow('select * from USER_COURSE where COURSE_ID=? and USER_ID=?', 
 is_owner = row.is_owner=='y'
 
 //日期及數字格式設定
-def sdf = new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
 def nf = NumberFormat.getInstance()
 nf.setMaximumFractionDigits( 2 )
 nf.setMinimumFractionDigits( 2 )
@@ -68,11 +69,14 @@ session.setAttribute('alert_message', null)
 html.setDoubleQuotes(true)
 html.html {
 	head {
-		title('PLWeb - Teaching Materials')
-		script (type: 'text/javascript', src: 'lesson_play.js', '')
-		link (rel:'stylesheet', type:'text/css', href:'default.css', media:'all')
+		title('教材單元列表 - PLWeb')
+		link(href: "${helper.basehref}stylesheets/screen.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/print.css", media: 'print', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<!--[if IE]>')
+		link(href: "${helper.basehref}stylesheets/ie.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<![endif]-->')
 	}
-	body {
+	body (class: 'admin-layout') {
 		if (error_message) {
 			div (class: 'error_message', error_message)
 		}
@@ -80,28 +84,30 @@ html.html {
 			div (class: 'alert_message', alert_message)
 		}
 		
-		h2("Teaching Materials")
-		h3 ("${course_name} / ${course_title} (${course_id})")
+		h1('教材單元列表')
+		
+		p {
+			span ("${course_name} / ${course_title}")
+			span (style: 'color:gray', "(${course_id})")
+		}
 
-		a(href:"course_center.groovy") {
-			img (src:'icons/arrow_undo.png', border:0)
-			span ('Back')
+		a(href: 'index.groovy') {
+			img (src:'../icons/arrow_undo.png', border:0)
+			span ('返回教材管理')
 		}
 
 		hr ()
-		h3 ('Contents')
 
 		table (width:'100%') {
 			tr {
-				th (width:30, '#')
-				th (width:60, 'Sort')
-				th ('Chapter Title')
-				th (width:40, 'Num')
-				th (width:70, 'Size')
-				th (width:110, 'Last Modified')
-				
-				th (class: 'small', width:40, 'Edit')
-				th (class: 'small', width:100, 'Action')
+				th (width: 30, '#')
+				th (width: 60, '排序')
+				th ('單元標題')
+				th (width: 40, '數量')
+				th (width: 100, '容量')
+				th (class: 'small', width: 150, '最後修改日期')
+				th (class: 'small', width: 40, '修改')
+				th (class: 'small', width: 100, '維護')
 			}
 			
 			rows = sql.rows(query1, [course_id])
@@ -124,90 +130,96 @@ html.html {
 				href_remove	= "lesson_remove.groovy?course_id=${row.course_id}&lesson_id=${row.lesson_id}"
 
 				tr (class: c%2==0?'even':'odd') {
-					td (align:'center', ++c)
+					td (class: 'small', align:'center', style: 'text-align:center', ++c)
 					td (align:'center') {
 						if (c > 1)
 						a(class: 'icon', href: href_up) {
-							img (src:'icons/arrow_up.png', border:0, align:'left')
+							img (src: '../icons/arrow_up.png', border:0, align:'left')
 						}
 						if (c < rows.size())
 						a(class: 'icon', href: href_down) {
-							img (src:'icons/arrow_down.png', border:0, align:'right')
+							img (src: '../icons/arrow_down.png', border:0, align:'right')
 						}
 					}
 					td {
-						span {
-							img (src:'icons/book.png', border:0)
+						img (src: '../icons/book.png', border:0)
+						a (href: href_edit) {
 							span ("${row.title}")
-							font(color:'darkgray', "(${row.lesson_id})")
 						}
 					}
-					td (row.tasknum)
-					td (class:'small', align:'right', nf.format(row.text_size/1024)+' kb')
-					td (class:'small', align:'center', sdf.format(new Date(row.updated.toLong())))
-					
-					td (align:'center') {
-						a(class:'icon', href:href_edit) {
-							img (src:'icons/book_edit.png', border:0)
+					td (class: 'small', align: 'center', style: 'text-align:center') {
+						span (row.tasknum)
+					}
+					td (class: 'small', align:'right', style: 'text-align:right') {
+						def sizeInKilobytes = Math.round(row.text_size==null?0:row.text_size/1024)
+						sizeInKilobytes = DecimalFormat.getNumberInstance().format(sizeInKilobytes)
+						span ("${sizeInKilobytes} kb")
+					}
+					td (class:'small', align:'center', style: 'text-align:center') {
+						def sdf = new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm")
+						def dateToDisplay = sdf.format(new Date(row.updated?.toLong()))
+						span (dateToDisplay)
+					}
+					td (align: 'center', style: 'text-align:center') {
+						a (class:'icon', href: href_edit) {
+							img (src: '../icons/book_edit.png', border: 0)
 						}
 					}
 					td (align:'center') {
 						a(class:'icon', title:'Play', href: href_play) {
-							img (src: 'icons/book_go.png', border:0)
+							img (src: '../icons/book_go.png', border:0)
 						}
 						a(class:'icon', title:'Export', href: href_export) {
-							img (src: 'icons/book_link.png', border:0)
+							img (src: '../icons/book_link.png', border:0)
 						}
 						a(class:'icon', title:'Copy', href:href_copy) {
-							img (src:'icons/book_add.png', border:0)
+							img (src: '../icons/book_add.png', border:0)
 						}
 						a(class:'icon', title:'Remove', href:href_remove, onclick: "return confirm('Are you sure???');") {
-							img (src:'icons/book_delete.png', border:0)
+							img (src: '../icons/book_delete.png', border:0)
 						}
 					}
 
 				}
 			}
 			tr {
-				th (colspan:3, 'Total')
-				td (t_task)
-				td (class:'small', align: 'right', nf.format(t_size/1024)+' kb')
+				th (colspan: 3, '小計')
+				td (class: 'small', align: 'center', style: 'text-align:center') {
+					span (t_task)
+				}
+				td (class:'small', align: 'right', style: 'text-align:right') {
+					def sizeInKilobytes = Math.round(t_size==null?0:t_size/1024)
+					sizeInKilobytes = DecimalFormat.getNumberInstance().format(sizeInKilobytes)
+					span ("${sizeInKilobytes} kb")
+				}
 				td (colspan:3)
 			}
 			tr {
 				td (colspan: 8, align: 'right') {
-					input (type:'button', onclick:"location.href='course_update.groovy?course_id=${course_id}'", value:'Update')
+					input (type:'button', onclick:"location.href='course_update.groovy?course_id=${course_id}'", value: '更新單元')
 				}
 			}
 		}
+		
 		hr()
-		h3 ('Add New Chapter')
-		form (action:'lesson_add.groovy', method:'post') {
-			input (type:'hidden', name:'course_id', value:course_id)
-			table {
-				tr {
-					th (colspan: 2, 'Select Template')
-				}
-				tr {
-					td ('Template: ')
-					td {
-						select (name:'template', '') {
-							sql.eachRow(query1, [0]) {
-								row->
-								option(value:row.lesson_id, row.title)
-							}
-						}
-					}
-				}
-				tr {
-					td (colspan: 2, align: 'right') {
-						input (type:'submit', value:'Add')
-					}
+
+		h2 ('新增單元')
+
+		form (action: 'lesson_add.groovy', method: 'post') {
+			input (type: 'hidden', name: 'course_id', value: course_id)
+			span ('從範本選取:')
+			select (name:'template', '') {
+				sql.eachRow(query1, [0]) {
+					row->
+					option(value:row.lesson_id, row.title)
 				}
 			}
+			input (type: 'submit', value: '新增單元')
 		}
 		hr()
-		h3 ('Course Preferences')
+
+		h2 ('進階設定')
+		
 		row = sql.firstRow('select * from COURSE where COURSE_ID=?', [course_id])
 		table (width: '100%') {
 			tr {
@@ -228,7 +240,9 @@ html.html {
 			}
 		}
 		hr()
-		h3 ('Members')
+
+		h2 ('權限設定')
+		
 		table (width: '100%'){
 			tr {
 				th ('#')
@@ -271,72 +285,43 @@ html.html {
 			}
 		}
 		div (align: 'right') {
-			span ("* You can't remove yourself.")
-			br()
-			span ("* Owners have permission to add new member.")
+			ul {
+				li ("You can't remove yourself.")
+				li ("Owners have permission to add new member.")
+			}
 		}
 		if (is_owner) {
 			form (action: 'course_member_add.groovy', method: 'post') {
 				input (type: 'hidden', name: 'course_id', value: course_id)
-				table {
-					tr {
-						th (colspan: 2, 'New Member')
-					}
-					tr {
-						td ('User ID / E-Mail:')
-						td {
-							input (name: 'user_id')
-						}
-					}
-					tr {
-						td (colspan: 2, align: 'right') {
-							input (type: 'submit', value: 'Add')
-						}
-					}
-				}
+				span ('新增編輯成員:')
+				input (name: 'user_id')
+				input (type: 'submit', value: '新增成員')
 			}
 		}
 		hr()
-		h3 ('Upload/Import(*.xml)')
+		h2 ('上傳教材')
 		form (action: 'lesson_upload.groovy', method: 'post', enctype: 'multipart/form-data') {
 			input (type: 'hidden', name: 'course_id', value: course_id)
-			table {
-				tr {
-					th (colspan: 2, 'Open File')
-				}
-				tr {
-					td ('File:')
-					td {
-						input (type: 'file', name: 'picture', size: '30')
-					}
-				}
-				tr {
-					td (colspan: 2, align: 'right') {
-						input (type: 'submit', value: 'Upload')
-					}
-				}
+			p {
+				span ('教材檔案:')
+				input (type: 'file', name: 'picture', size: '30')
+				span ('(教材檔名必須為 *.xml)')
 			}
+			input (type: 'submit', value: '開始上傳')
 		}
 		hr()
-		h3 ('Download/Export(*.zip)')
-		table (width: 500) {
-			tr {
-				th (colspan: 2, 'Save File')
+
+		h2 ('匯出教材')
+		
+		p {
+			span ('ZIP 壓縮格式')
+			a (href: "course_export.groovy?course_id=${course_id}") {
+				strong("${course_name}.zip")
 			}
-			tr {
-				td (width: 100, 'File Name:')
-				td {
-					a (href: "course_export.groovy?course_id=${course_id}") {
-						big {
-							strong("${course_name}.zip")
-						}
-					}
-					br()
-					br()
-					div ("* Clcik and save the file to your selected disk location.")
-					div ("* This archived file includes serval lesson*.xml files.")
-				}
-			}
+		}
+		ul {
+			li ("Clcik and save the file to your selected disk location.")
+			li ("This archived file includes serval lesson*.xml files.")
 		}
 	}
 }

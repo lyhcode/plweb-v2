@@ -6,7 +6,6 @@ import javax.sql.*;
 import javax.servlet.*;
 
 public class ServletRequestInjectionListener implements ServletRequestListener{
-	@Override
 	public void requestInitialized(ServletRequestEvent sre) {
 		ServletRequest req = sre.getServletRequest();
 		try {
@@ -20,7 +19,6 @@ public class ServletRequestInjectionListener implements ServletRequestListener{
 		}
 	}
 
-	@Override
 	public void requestDestroyed(ServletRequestEvent sre) {
 		ServletRequest req = sre.getServletRequest();
 		Object obj = req.getAttribute("dbconn");

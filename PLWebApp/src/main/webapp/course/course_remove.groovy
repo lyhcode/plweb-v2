@@ -18,5 +18,5 @@ catch (e) {
 
 sql.close()
 
-response.sendRedirect('course_center.groovy')
+response.sendRedirect('index.groovy')
 

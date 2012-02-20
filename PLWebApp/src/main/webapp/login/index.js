@@ -14,43 +14,41 @@ $(document).ready(function() {
 	var login_init = function() {
 		$('input.input-text').tipsy({trigger: 'focus', gravity: 'w'});
 		
+		var emailfield = $('input[name=email]');
+		var passwordfield = $('input[name=password]');
+
 		var check_by_ajax = function(e) {
-		    $('input[name=email]').removeClass('correct');
-		    $('input[name=email]').removeClass('error');
+		    emailfield.removeClass('correct').removeClass('error');
 		    
 			$.ajax({
 				type: 'post',
 				dataType: 'json',
-				url : $('input[name="login_ajax_url"]').val(),
+				url : $('input[name="ajax_url"]').val(),
 				data: {
-					email: $('input[name=email]').val(),
-					password: $('input[name=password]').val()
+					action: 'checkemail',
+					email: emailfield.val()
 				},
 				error : function(xhr) {
 				},
 				success : function(o) {
-				    if ($('input[name=email]').val() != '') {
-                        if (!o.email_ok) {
-                            $('input[name=email]').addClass('error');
-                        }
-                        else {
-                            $('input[name=email]').addClass('correct');
-                        }
+				    if (emailfield.val() != '') {
+				    	emailfield.addClass(o.emailok?'correct':'error');
                     }
 				}
 			});
 		};
 		
-		$('input[name=email], input[name=password]').change(check_by_ajax);
-		
-		if ($('input[name=email]').val() == '') {
-			$('input[name=email]').focus();
+		$(emailfield).change(check_by_ajax);
+		$(emailfield).keyup(function() {
+			$(this).removeClass('error').removeClass('correct');
+		});
+		if (emailfield.val() == '') {
+			emailfield.focus();
 		}
 		else {
-			$('input[name=password]').focus();
-		}
-		
-		if ($('input[name=email]').val() != '' || $('input[name=password]').val() != '') {
+			passwordfield.focus();
+		}		
+		if (emailfield.val() != '') {
 		    check_by_ajax();
 		}
 	};

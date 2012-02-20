@@ -1,6 +1,5 @@
 import groovy.sql.Sql
 import groovy.xml.MarkupBuilder
-import javax.naming.InitialContext
 import org.plweb.webapp.helper.CommonHelper
 
 def helper = new CommonHelper(request, response)
@@ -17,11 +16,14 @@ session.setAttribute('alert_message', null)
 
 html.html {
 	head {
-		title("PLWeb - Content Editing")
-		link (rel:'stylesheet', type:'text/css', href:'default.css', media:'all')
-		script(type:"text/javascript", src: 'course_add.js', '') {}
+		title("編輯教材設定 - PLWeb")
+		link(href: "${helper.basehref}stylesheets/screen.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/print.css", media: 'print', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<!--[if IE]>')
+		link(href: "${helper.basehref}stylesheets/ie.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<![endif]-->')
 	}
-	body {
+	body (class: 'admin-layout') {
 		if (error_message) {
 			div (class: 'error_message', error_message)
 		}
@@ -62,8 +64,8 @@ html.html {
 				}
 				tr {
 					td (colspan: 2, align: 'right') {
-						input (type:"submit", value:"Save")
-						input (type:"button", value:"Cancel", onclick: 'cancel();')
+						input (type:"submit", value:"儲存")
+						input (type:"button", value:"取消", onclick: "location.href='index.groovy';")
 					}
 				}
 			}	

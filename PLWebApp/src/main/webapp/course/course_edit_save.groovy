@@ -20,7 +20,7 @@ try {
 	session.setAttribute('alert_message', 'Book updated.');	
 	
 	//回列表
-	response.sendRedirect('course_center.groovy')
+	response.sendRedirect('index.groovy')
 	
 }
 catch (e) {

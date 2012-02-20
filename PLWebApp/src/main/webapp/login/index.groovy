@@ -16,13 +16,7 @@ and IS_LOGIN='y'
 sql = new Sql(helper.connection)
 
 ucount = 0
-try {
-	ucount = sql.firstRow(query1, [new Date().time-(3*60*60*1000)]).USER_COUNT
-}
-catch (e) {
-}
-
-sql.close()
+ucount = sql.firstRow(query1, [new Date().time-(3*60*60*1000)]).USER_COUNT
 
 helper.attr 'ucount', ucount
 

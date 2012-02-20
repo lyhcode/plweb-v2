@@ -1,6 +1,7 @@
 apply plugin: 'jetty'
 apply plugin: 'java'
 apply plugin: 'groovy'
+apply plugin: 'eclipse'
 
 repositories {
     mavenCentral()
@@ -56,6 +57,17 @@ dependencies {
     // PLWeb Libraries
     runtime files ('../PLWebXML/build/libs/plwebxml-1.0.jar')
 }
+
+task sync(type:Exec) {
+    workingDir '.'
+    commandLine 'make', 'sync'
+}
+
+def defaultEncoding = 'UTF-8'
+
+[compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+[compileGroovy, compileTestGroovy]*.options*.encoding = defaultEncoding
+[compileGroovy, compileTestGroovy]*.groovyOptions*.encoding = defaultEncoding
 
 [jettyRun, jettyRunWar]*.with {
     contextPath = ''

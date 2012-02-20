@@ -26,6 +26,7 @@ import javax.sql.DataSource;
 
 public class CommonHelper {
 
+	private static final String JNDI_JDBC_PLWEB = "java:comp/env/jdbc/plweb";
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession session;
@@ -103,19 +104,23 @@ public class CommonHelper {
 	}
 
 	public Connection getConnection() throws SQLException, NamingException {
+
+		// Retrieve Connection from request attributes
 		Object obj = request.getAttribute("dbconn");
-		
+
 		if (obj instanceof Connection) {
-			return (Connection)obj;
+			Connection conn = (Connection) obj;
+			if (!conn.isClosed()) {
+				return (Connection) obj;
+			}
 		}
 
-		return ((DataSource) new InitialContext()
-				.lookup("java:comp/env/jdbc/plweb")).getConnection();
+		return ((DataSource) new InitialContext().lookup(JNDI_JDBC_PLWEB))
+				.getConnection();
 	}
 
 	public DataSource getDataSource() throws NamingException {
-		return ((DataSource) new InitialContext()
-				.lookup("java:comp/env/jdbc/plweb"));
+		return ((DataSource) new InitialContext().lookup(JNDI_JDBC_PLWEB));
 	}
 
 	public String fetch(String name) throws UnsupportedEncodingException {
@@ -194,9 +199,9 @@ public class CommonHelper {
 
 	public void sess_new() {
 		session = request.getSession(true);
-		Enumeration<String> en = session.getAttributeNames();
-		while (en.hasMoreElements()) {
-			String key = en.nextElement();
+		Enumeration<?> name = session.getAttributeNames();
+		while (name.hasMoreElements()) {
+			String key = (String) name.nextElement();
 			session.removeAttribute(key);
 		}
 	}
@@ -232,7 +237,7 @@ public class CommonHelper {
 
 	public String htmlhead(String pathOfRoot) {
 		String basehref = getBasehref();
-		
+
 		StringBuffer sb = new StringBuffer();
 		sb.append("<base href=\"").append(basehref).append("\" />");
 		sb.append(
@@ -243,14 +248,6 @@ public class CommonHelper {
 				"<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"")
 				.append(basehref).append(pathOfRoot)
 				.append("css/fancybox/jquery.fancybox-1.3.1.css\" />");
-		sb.append(
-				"<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"")
-				.append(basehref).append(pathOfRoot)
-				.append("css/common.css\" />");
-		sb.append(
-				"<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"")
-				.append(basehref).append(pathOfRoot)
-				.append("css/prettyhtml.css\" />");
 		sb.append("<script type=\"text/javascript\" src=\"").append(basehref)
 				.append(pathOfRoot)
 				.append("js/jquery-1.4.2.min.js\"></script>");
@@ -342,11 +339,12 @@ public class CommonHelper {
 		return conn.getContent().toString();
 	}
 
-	public String make_url(String path) {
+	public String make_url(String path) throws UnsupportedEncodingException {
 		return make_url(path, new HashMap<Object, Object>());
 	}
 
-	public String make_url(String path, HashMap<Object, Object> param) {
+	public String make_url(String path, HashMap<Object, Object> param)
+			throws UnsupportedEncodingException {
 		return make_url(path, param, false);
 	}
 
@@ -357,13 +355,15 @@ public class CommonHelper {
 	 * @param param
 	 * @param prefix
 	 * @return
+	 * @throws UnsupportedEncodingException
 	 */
-	public String make_url(String path, ArrayList<Object> param, boolean prefix) {
+	public String make_url(String path, ArrayList<Object> param, boolean prefix)
+			throws UnsupportedEncodingException {
 		return make_url(path, new HashMap<Object, Object>(), prefix);
 	}
 
 	public String make_url(String path, HashMap<Object, Object> param,
-			boolean prefix) {
+			boolean prefix) throws UnsupportedEncodingException {
 		StringBuilder result = new StringBuilder();
 
 		if (prefix) {
@@ -381,7 +381,7 @@ public class CommonHelper {
 				result.append(c > 0 ? "&" : "?");
 				result.append(key);
 				result.append("=");
-				result.append(URLEncoder.encode(String.valueOf(value)));
+				result.append(URLEncoder.encode(String.valueOf(value), "UTF-8"));
 
 				c++;
 			}
