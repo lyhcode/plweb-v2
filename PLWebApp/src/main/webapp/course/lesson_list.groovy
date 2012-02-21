@@ -66,11 +66,15 @@ alert_message = session.getAttribute('alert_message')?session.getAttribute('aler
 session.setAttribute('error_message', null)	
 session.setAttribute('alert_message', null)
 
-html.setDoubleQuotes(true)
+html.doubleQuotes = true
+html.expandEmptyElements = true
+html.omitEmptyAttributes = false
+html.omitNullAttributes = false
 html.html {
 	head {
 		title('教材單元列表 - PLWeb')
 		link(href: "${helper.basehref}stylesheets/screen.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/silk-sprite.css", media: 'screen', rel: 'stylesheet', type: 'text/css')
 		link(href: "${helper.basehref}stylesheets/print.css", media: 'print', rel: 'stylesheet', type: 'text/css')
 		mkp.yieldUnescaped('<!--[if IE]>')
 		link(href: "${helper.basehref}stylesheets/ie.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
@@ -98,7 +102,7 @@ html.html {
 
 		hr ()
 
-		table (width:'100%') {
+		table (width: '100%', class: 'fancy-table') {
 			tr {
 				th (width: 30, '#')
 				th (width: 60, '排序')
@@ -143,7 +147,7 @@ html.html {
 					}
 					td {
 						img (src: '../icons/book.png', border:0)
-						a (href: href_edit) {
+						a (href: href_edit, title: "編輯 ${row.title}") {
 							span ("${row.title}")
 						}
 					}
@@ -161,22 +165,22 @@ html.html {
 						span (dateToDisplay)
 					}
 					td (align: 'center', style: 'text-align:center') {
-						a (class:'icon', href: href_edit) {
-							img (src: '../icons/book_edit.png', border: 0)
+						a (href: href_edit) {
+							span (class: 'icons ss_book_edit')
 						}
 					}
 					td (align:'center') {
-						a(class:'icon', title:'Play', href: href_play) {
-							img (src: '../icons/book_go.png', border:0)
+						a (title: 'Play', href: href_play) {
+							span (class: 'icons ss_book_go')
 						}
-						a(class:'icon', title:'Export', href: href_export) {
-							img (src: '../icons/book_link.png', border:0)
+						a (title: 'Export', href: href_export) {
+							span (class: 'icons ss_book_link')
 						}
-						a(class:'icon', title:'Copy', href:href_copy) {
-							img (src: '../icons/book_add.png', border:0)
+						a (title: 'Copy', href: href_copy) {
+							span (class: 'icons ss_book_add')
 						}
-						a(class:'icon', title:'Remove', href:href_remove, onclick: "return confirm('Are you sure???');") {
-							img (src: '../icons/book_delete.png', border:0)
+						a (title: 'Remove', href: href_remove, onclick: "return confirm('Are you sure???');") {
+							span (class: 'icons ss_book_delete')
 						}
 					}
 

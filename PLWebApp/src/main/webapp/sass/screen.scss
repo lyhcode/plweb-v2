@@ -7,12 +7,14 @@
 @import "compass/css3";
 @import "compass/utilities";
 @import "fancy-buttons";
+@import "actions/*.png";
 
 /*
  * 通用樣式定義區
  */
 .div-clear { clear: both; }
 .div-hide { display: none; }
+
 a {
 	text-decoration: none;
 }
@@ -29,27 +31,130 @@ a {
 	font-size: 13px;
 	cursor: pointer;
 }
+
 .btn-control:hover {
 	color: blue;
 }
+
 .btn-control img {
 	vertical-align: middle;
 	border: 0;
 }
 
 .fancy-button {
-	@include fancy-button(#124c89, 16px, 5em, 1px);
+	@include fancy-button(#124c89, 16px, 10px, 1px);
 }
 
 .fancy-button-gray {
-	@include fancy-button(#eeeeee, 16px, 5em, 1px);
+	@include fancy-button(#eeeeee, 16px, 10px, 1px);
 }
 
+td.center, th.center {
+	text-align: center;
+}
+td.left, th.left {
+	text-align: center;
+}
+td.right, th.right {
+	text-align: right;
+}
 
 .fancy-layout {
+	margin: 0;
+	padding: 0;
+	background-color: #ffffff;
+	background-image: url('../img/plweb_background.png');
+	background-repeat: repeat-x;
+
+	.page-wrapper {
+		width: 900px;
+		margin: 0 auto;
+		margin-bottom: 20px;
+	}
+
+	.header {
+		height: 120px;
+	}
 
 	#logo {
 		margin-left: 15px;
+	}
+
+	.plweb-logo {
+		margin-top: 20px;
+		margin-left: 10px;
+	}
+
+	.content-wrapper {
+		background: {
+			color: #ffffff;
+		}
+		border: 1px solid #aaaaaa;
+		@include border-radius(10px);
+		@include single-box-shadow(#cccccc, 0, 0, 5px, false, false);
+	}
+
+	.content-top {
+	}
+
+	.content {
+		background-color: #ffffff;
+		margin: 5px;
+	}
+
+	.content-bottom {
+		height: 18px;
+	}
+
+	.font-bold {
+		font-weight: bold;
+	}
+
+	.font-widget {
+		font-family: Segoe UI, Arial, sans-serif; font-size: 1.1em;
+	}
+
+	.font-field {
+		font-family: Arial, Helvetica, sans-serif;
+	}
+
+	.font-numeric {
+		font-family: Georgia, Arial, sans-serif;
+	}
+
+	/* Message (Display) */
+
+	div.message {
+	    padding: .5em;
+	    margin: 15px;
+	    color: #555;
+	    border: 1px solid #dadada;
+	    background-color: #ffffdd;
+	}
+
+	/* heading styles */
+	h1,h2,h3,h4,h5,h6 {
+		font-weight: bold;
+		color: #080000;
+		font-family: sans-serif;
+	}
+
+	h1 {
+		@include single-text-shadow(#cccccc, 2px, 2px, 2px);
+		font-size: 2.2em;
+		line-height: 2.5em;
+	}
+
+	h2 {
+		@include single-text-shadow(#cccccc, 2px, 2px, 2px);
+		font-size: 1.8em;
+		line-height: 2em;
+	}
+
+	h3 {
+		@include single-text-shadow(#cccccc, 2px, 2px, 2px);
+		font-size: 1.5em;
+		line-height: 1.8em;
 	}
 
 	.content-wrapper {
@@ -115,14 +220,6 @@ a {
 	    color: #555555;
 	    font-size: .825em;
 	}
-
-	.form-table .button-submit {
-		width: 250px;
-		padding: .5em;
-		font-size: 1.2em;
-		cursor: pointer;
-	}
-
 	.signup-error li {
 		color: #aa0000;
 		font-weight: bold;
@@ -194,145 +291,68 @@ a {
 		line-height:1.8em;
 	}
 
-	.topNav {
+	.topnav {
 		float: right;
+
+		.topLinks {
+			font-size: 11px;
+			color: #999999;
+			text-align: right;
+			padding: 10px;
+			margin-right: 10px;
+		
+			a {
+				font-size: 13px;
+				font-weight: normal;
+				text-decoration: none;
+				color: #dadada;
+			}
+			a:hover {
+				color: #ffffff;
+			}
+		}
+	
+		.formLinks {
+			margin-right: 20px;
+		
+			ul {
+				margin:0;
+				padding:0;
+				list-style:none;
+			}
+			li {
+				margin:0;
+				padding:0;
+				float:left;
+				margin-right:10px;
+			}
+			.link-item {
+				color: #eeeeee;
+				font-family: sans-serif;
+				font-size: 18px;
+				font-weight: bold;
+				text-align:center;
+				text-decoration: none;
+				@include single-text-shadow(#333333, 2px, 2px, 2px);
+			}
+			.link-item {
+				display: table-cell;
+				vertical-align: middle;
+				width: 119px;
+				height: 41px;
+				background-color: #23435F;
+				
+				@include actions-sprite(topnav);
+			}
+			.link-item:hover {
+				color: #ffffff;
+				background-color: #3F617F;
+			}
+		}
 	}
-	.topNav .formLinks {
-		margin-right: 50px;
-	}
-	.topNav .formLinks ul {
-		margin:0;
-		padding:0;
-		list-style:none;
-	}
-	.topNav .formLinks li {
-		margin:0;
-		padding:0;
-		float: left;
-		margin-right: 10px;
-	}
-	.topNav .formLinks a.link-item {
-		color: #dddddd;
-		display: table-cell;
-		vertical-align: middle;
-		width: 119px;
-		height: 41px;
-		text-align:center;
-		font-family: Arial;
-		font-size: 18x;
-		font-weight: bold;
-		text-decoration: none;
-		background-color: #23435F;
-		background-image: url('../img/plweb_topnav_bg.png');
-	}
-	.topNav .formLinks a.link-item:hover {
-		color: #ffffff;
-		background-color: #3F617F;
-		background-image: url('../img/plweb_topnav_bg_hover.png');
-	}
-	.topNav .topLinks {
-		font-size: 11px;
-		color: #bbbbbb;
-		text-align: right;
-		padding: 10px;
-		margin-right: 10px;
-	}
-	.topNav .topLinks a {
-		font-size: 13px;
-		font-weight: bold;
-		text-decoration: none;
-		color: #cccccc;
-	}
-	.topNav .topLinks a:hover {
-		color: #ffffff;
-	}
+	
 }
 /* --- End Of .fancy-layout --- */
-
-body.theme {
-	margin: 0;
-	padding: 0;
-	background-color: #ffffff;
-	background-image: url('../img/plweb_background.png');
-	background-repeat: repeat-x;
-
-	.page-wrapper {
-		width: 900px;
-		margin: 0 auto;
-		margin-bottom: 20px;
-	}
-
-	.header {
-		height: 120px;
-	}
-
-	.plweb-logo {
-		margin-top: 20px;
-		margin-left: 10px;
-	}
-
-	.content-wrapper {
-		background: {
-			color: #ffffff;
-		}
-		border: 1px solid #aaaaaa;
-		@include border-radius(10px);
-		@include single-box-shadow(#cccccc, 0, 0, 5px, false, false);
-	}
-
-	.content-top {
-	}
-
-	.content {
-		background-color: #ffffff;
-		margin: 5px;
-	}
-
-	.content-bottom {
-		height: 18px;
-	}
-
-	.font-bold {
-		font-weight: bold;
-	}
-
-	.font-widget {
-		font-family: Segoe UI, Arial, sans-serif; font-size: 1.1em;
-	}
-
-	.font-field {
-		font-family: Arial, Helvetica, sans-serif;
-	}
-
-	.font-numeric {
-		font-family: Georgia, Arial, sans-serif;
-	}
-
-	/* Message (Display) */
-
-	div.message {
-	    padding: .5em;
-	    margin: 15px;
-	    color: #555;
-	    border: 1px solid #dadada;
-	    background-color: #ffffdd;
-	}
-
-	/* page style */
-	h1 {
-		font-size: 2em;
-		line-height: 2em;
-	}
-
-	h2 {
-		font-size: 1.5em;
-		line-height: 1.8em;
-	}
-
-	th {
-		font-weight: bold;
-	}
-}
 
 /*
  * 登入頁面樣式定義
@@ -427,11 +447,10 @@ body.theme {
 	}
 
 	.signup-userSize span {
-		color: #ffffff;
+		color: #000000;
 		font-weight: bold;
 		font-family: Georgia;
 		font-size: 1.2em;
-		background-color: #000000;
 		padding: 3px;
 		display: inline-block;
 		text-align: center;
@@ -484,6 +503,11 @@ body.theme {
 			width: 200px;
 			margin-bottom: .1em;
 		}
+
+		.sidebar-link-small {
+			@include single-text-shadow(#999999, 1px, 1px, 1px);
+			color: #0000ff;
+		}
 	}
 }
 
@@ -492,21 +516,31 @@ body.theme {
 	margin: 10px;
 	font-size: 13px;
 
+	/* heading styles */
+	h1,h2,h3,h4,h5,h6 {
+		font-weight: bold;
+		color: #080000;
+		font-family: sans-serif;
+	}
+
 	h1 {
+		@include single-text-shadow(#cccccc, 2px, 2px, 2px);
+		font-size: 2.2em;
+		line-height: 2.5em;
+	}
+
+	h2 {
+		@include single-text-shadow(#cccccc, 2px, 2px, 2px);
 		font-size: 1.8em;
 		line-height: 2em;
 	}
 
-	h2 {
+	h3 {
+		@include single-text-shadow(#cccccc, 2px, 2px, 2px);
 		font-size: 1.5em;
 		line-height: 1.8em;
 	}
-
-	h3 {
-		font-size: 1.25em;
-		line-height: 1.5em;
-	}
-
+	
 	p {
 		line-height: 1.4em;
 		margin-bottom: .5em;
@@ -530,30 +564,56 @@ body.theme {
 		text-decoration: none;
 	}
 
-	a {
-		color: blue;
-		text-decoration: none;
+	a.fancy-link {
+		color: #469237;
+		font-size: 15px;
+		font-weight: bold;
+		@include single-text-shadow(#A1E45A, 1px, 1px, 1px);
 	}
 
-	a:hover {
-		text-decoration: underline;
-	}
+	.fancy-table {
+		color: #090D3B;
 
-	table td {
-		padding: 5px;
-	}
+		th, td {
+			padding: 5px 3px;
+		}
 
-	table th {
-		font-size: 13px;
-		background-color: #333333;
-		color: #ffffff;
-		padding: 5px 0;
-		text-align: center;
-	}
+		th {
+			font-size: 15px;
+			font-weight: bold;
+			background-color: #78C0F0;
+			color: #1B325F;
+			text-align: center;
 
-	table th.small {
-		font-size:13px;
-		font-weight:normal;
+			@include single-text-shadow(#EBF7F8, 1px, 1px, 1px);
+		}
+
+		th.small {
+			font-size: 13px;
+			font-weight: normal;
+		}
+
+		td {
+			font-size: 15px;
+			background-color: #E9F2F9;
+		}
+
+		td.small {
+			font-size: 13px;
+		}
+
+		td a {
+			color: #F26C4F;
+		}
+
+		.odd td {
+			background-color: #DAF3FF;
+		}
+
+		.even td {
+			background-color: #F1FBFF;
+		}
+
 	}
 
 	table th.verticle {
@@ -562,14 +622,7 @@ body.theme {
 		padding: 2px;
 	}
 
-	table td {
-		font-size: 15px;
-		background-color: #eeeeee;
-	}
 
-	table td.small {
-		font-size:13px;
-	}
 
 	.left-menu {
 		font-size: 13px;
@@ -689,14 +742,6 @@ body.theme {
 		background:url('Images/topmenu_06.gif') no-repeat;
 		background-position: 0 -15px;
 		height:100px;
-	}
-
-	.odd td {
-		background-color: #eeeeee;
-	}
-
-	.even td {
-		background-color: #dddddd;
 	}
 
 	marquee.announce {

@@ -1,23 +1,40 @@
 import groovy.sql.Sql
-import javax.naming.InitialContext
 import org.plweb.webapp.helper.CommonHelper
 
 def helper = new CommonHelper(request, response)
 
-uid = session.getAttribute('uid')
+if (!session) {
+	response.sendError 403
+	return
+}
 
-name  = helper.fetch('name')
-title = helper.fetch('title').
+def uid = session.getAttribute('uid')
 
-ds = new InitialContext().lookup('java:comp/env/jdbc/plweb')
-sql = new Sql(ds.getConnection())
+def name  = helper.fetch('name')
+def title = helper.fetch('title')
+
+if (name==null || name=='') {
+	helper.sess 'error_message', "必須填寫教材代碼"
+	helper.forward 'course_add.groovy'
+	return
+}
+
+if (title==null || title=='') {
+	helper.sess 'error_message', "必須填寫教材名稱"
+	helper.forward 'course_add.groovy'
+	return
+}
+
+def sql = new Sql(helper.connection)
 
 try {
 	//檢查是否曾經建立
 	cc = sql.firstRow('select count(*) as cc from COURSE where COURSE_NAME=?', [name]).cc
 	
 	if (cc > 0) {
-		throw new Exception('name exists')
+		helper.sess 'error_message', "指定的教材代碼已經存在"
+		helper.forward 'course_add.groovy'
+		return
 	}
 	
 	//插入資料
@@ -31,18 +48,13 @@ try {
 
 	sql.execute('insert into USER_COURSE(COURSE_ID, USER_ID, IS_OWNER) values (?,?,?)', [newId, uid, 'y'])
 	
-	session.setAttribute('alert_message', 'Book added.')
+	helper.sess 'alert_message', '教材已新增完成'
 	
 	//回列表
 	response.sendRedirect('index.groovy')
 	
 }
 catch (e) {
-	session.setAttribute('error_message', e.message)
-	
-	//發生錯誤, 繼續編輯
-    def rd = request.getRequestDispatcher('course_add.groovy')
-    rd.forward(request, response)
+	helper.sess 'error_message', "${e.message}"
+    helper.forward 'course_add.groovy'
 }
-
-sql.close()

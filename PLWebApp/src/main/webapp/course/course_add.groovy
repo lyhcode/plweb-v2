@@ -18,6 +18,7 @@ html.html {
 	head {
 		title("編輯教材設定 - PLWeb")
 		link(href: "${helper.basehref}stylesheets/screen.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/silk-sprite.css", media: 'screen', rel: 'stylesheet', type: 'text/css')
 		link(href: "${helper.basehref}stylesheets/print.css", media: 'print', rel: 'stylesheet', type: 'text/css')
 		mkp.yieldUnescaped('<!--[if IE]>')
 		link(href: "${helper.basehref}stylesheets/ie.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
@@ -31,19 +32,30 @@ html.html {
 			div (class: 'alert_message', alert_message)
 		}
 		
-		h2("Content Editing")
+		h1 ('新增教材')
 
-		h3("Add Content Set")
+		a (href: 'index.groovy') {
+			span (class: 'icons ss_arrow_undo')
+			span ('返回課程管理')
+		}
+		span (' | ')
+		a (href: 'javascript:location.reload()') {
+			span (class: 'icons ss_arrow_refresh')
+			span ('重新整理')
+		}
+		
+		hr()
+
 		form(action:"course_add_save.groovy", method:"post") {
 			input (type:"hidden", name:"id", value:id)
 			input (type:"hidden", name:"oname", value:name)
 			
-			table {
+			table (class: 'fancy-table') {
 				tr {
-					th (colspan: 2, 'Basic Settings')
+					th (colspan: 2, '設定新教材')
 				}
 				tr {
-					td ('Content ID: ')
+					td ('教材代碼:')
 					td {
 						input (name:"name", value:name)
 						br ()
@@ -55,7 +67,7 @@ html.html {
 					}
 				}
 				tr {
-					td ('Display Name: ')
+					td ('教材顯示名稱:')
 					td {
 						input (name:"title", value:title, size: 40)
 						br ()
@@ -63,9 +75,9 @@ html.html {
 					}
 				}
 				tr {
-					td (colspan: 2, align: 'right') {
-						input (type:"submit", value:"儲存")
-						input (type:"button", value:"取消", onclick: "location.href='index.groovy';")
+					td (colspan: 2, align: 'center', class: 'center') {
+						button (class: 'fancy-button', type: 'submit', '儲存')
+						a (class: 'fancy-button-gray', href: 'index.groovy', '取消')
 					}
 				}
 			}	

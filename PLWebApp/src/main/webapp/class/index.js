@@ -1,7 +1,3 @@
-function confirmRemove() {
-	return confirm('Are you sure?');
-}
-
 $(function () {
 
 	var cyear = $('input[name="cyear"]').val();

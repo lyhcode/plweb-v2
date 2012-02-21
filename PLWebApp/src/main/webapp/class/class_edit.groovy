@@ -22,11 +22,15 @@ def password	= row.PASSWORD
 def displayOnMenu = row.DISPLAY_ON_MENU
 
 html.doubleQuotes = true
+html.expandEmptyElements = true
+html.omitEmptyAttributes = false
+html.omitNullAttributes = false
 html.html {
 	head {
 		meta ('http-equiv': 'Content-Type', content: 'text/html; charset=utf-8')
 		title('修改課程設定 - PLWeb')
 		link(href: "${helper.basehref}stylesheets/screen.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/silk-sprite.css", media: 'screen', rel: 'stylesheet', type: 'text/css')
 		link(href: "${helper.basehref}stylesheets/print.css", media: 'print', rel: 'stylesheet', type: 'text/css')
 		mkp.yieldUnescaped('<!--[if IE]>')
 		link(href: "${helper.basehref}stylesheets/ie.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
@@ -37,11 +41,15 @@ html.html {
 
 		p ("課程代號：${id}")
 
-		a (href: response.encodeUrl('index.groovy'), '返回課程管理')
-
-		span(' | ', style: 'color: gray')
-
-		a (href: 'javascript:location.reload()', '重新整理')
+		a (href: 'index.groovy') {
+			span (class: 'icons ss_arrow_undo')
+			span ('返回課程管理')
+		}
+		span (' | ')
+		a (href: 'javascript:location.reload()') {
+			span (class: 'icons ss_arrow_refresh')
+			span ('重新整理')
+		}
 			
 		hr ()
 		

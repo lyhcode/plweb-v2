@@ -4,14 +4,13 @@ import org.plweb.webapp.helper.CommonHelper
 helper = new CommonHelper(request, response, session)
 
 if (!session) {
-	response.sendRedirect('/permission_denied.groovy')
-	return;
+	response.sendError 403
+	return
 }
 
-uid = session.get('uid')
+def uid = helper.sess('uid')
 
-// get/post data
-class_id       = helper.fetch('class_id')
+def class_id = helper.fetch('class_id')
 
 _SQL_LINK_USER_CLASS_ = """
 insert into USER_CLASS (USER_ID, CLASS_ID, IS_TEACHER)
@@ -21,31 +20,35 @@ values (?, ?, ?)
 _SQL_CHECK_CLASS_ = """
 select count(1) as cc from ST_CLASS where CLASS_ID=?
 """
-sql = new Sql(helper.connection)
 
-done = false
+_SQL_CHECK_LINK_ = '''
+select count(1) as cc from USER_CLASS where CLASS_ID=? and USER_ID=?
+'''
+
+def sql = new Sql(helper.connection)
 
 try {
 	if (class_id != null) {
-		cc = sql.firstRow(_SQL_CHECK_CLASS_, [class_id]).cc
+		def cc1 = sql.firstRow(_SQL_CHECK_CLASS_, [class_id]).cc
+		def cc2 = sql.firstRow(_SQL_CHECK_LINK_, [class_id, uid]).cc
 		
-		if (cc > 0) {		
-			sql.execute(_SQL_LINK_USER_CLASS_, [uid, class_id, 'n'])
-			done = true
-			session.setAttribute('alert_message', "您已經加選 ${class_id} 完成，返回我的課程頁面請記得重新整理。");
+		if (cc1 == 0) {
+			helper.sess 'error_message', '課程代碼不存在！'
+		}
+		else if (cc2 > 0) {
+			helper.sess 'error_message', '無法重複選修此課程！'
 		}
 		else {
-			session.setAttribute('error_message', '課程代碼不存在！')
+			sql.execute(_SQL_LINK_USER_CLASS_, [uid, class_id, 'n'])
+			helper.sess 'alert_message', "您已經加選 ${class_id}完成，返回我的課程頁面請記得重新整理。"			
 		}
 	}
 	else {
-		session.setAttribute('error_message', '未輸入課程代碼！')
+		helper.sess 'error_message', '未輸入課程代碼！'
 	}
 }
 catch (e) {
-	session.setAttribute('error_message', e.message)
+	helper.sess 'error_message', e.message
 }
 
-response.sendRedirect('index.groovy')
-
-sql.close()
+helper.redirect 'index.groovy'

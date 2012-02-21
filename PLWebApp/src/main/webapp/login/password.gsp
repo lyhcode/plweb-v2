@@ -9,13 +9,13 @@ helper = request.get('helper')
 			<td colspan="2" class="formDesc"><b>請填寫以下資料</b></td>
 		</tr>
 		<tr>
-			<th>電子郵件信箱</th>
+			<th>電子郵件信箱:</th>
 			<td>
 				<input type="text" name="email" class="input-text" value="${helper.fetch('email', '')}" title="輸入您的電子郵件信箱。" />
             </td>
 		</tr>
 		<tr>
-		    <th>驗證碼</th>
+		    <th>驗證碼:</th>
 		    <td>
 		        ${helper.attr('reCaptcha')}
 		    </td>
@@ -28,10 +28,9 @@ helper = request.get('helper')
 		</tr>
         <% } %>
 		<tr>
-			<td colspan="2" align="center">
-				<button class="fancy-button-01 button-submit" href="#" title="重新設定密碼">
-					<span><b>重新設定密碼</b></span>
-				</button>
+			<td colspan="2" align="center" class="center">
+				<button class="fancy-button" title="重新設定密碼">重新設定密碼</button>
+				<a href="index.groovy" class="fancy-button-gray">取消</a>
 			</td>
 		</tr>
     </table>

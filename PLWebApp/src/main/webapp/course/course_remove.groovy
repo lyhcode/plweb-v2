@@ -1,22 +1,28 @@
 import groovy.sql.Sql
-import groovy.xml.MarkupBuilder
-import javax.naming.InitialContext
+import org.plweb.webapp.helper.CommonHelper
 
-def course_id = request.getParameter("id")
+def helper = new CommonHelper(request, response)
 
-def ds = new InitialContext().lookup('java:comp/env/jdbc/plweb')
-def sql = new Sql(ds.connection)
-
-try {	
-	sql.execute('update COURSE set VISIBLED=? where COURSE_ID=?', ['n', course_id])
-
-	session.setAttribute('alert_message', 'course removed');
-}
-catch (e) {
-	session.setAttribute('error_message', e.message);
+if (!session) {
+	response.sendError 403
+	return
 }
 
-sql.close()
+def course_id = helper.fetch('id')
 
-response.sendRedirect('index.groovy')
+def sql = new Sql(helper.connection)
 
+if (course_id!=null && course_id!='') {
+
+	try {	
+		sql.execute('update COURSE set VISIBLED=? where COURSE_ID=?', ['n', course_id])
+
+		helper.sess 'alert_message', '教材已經移除'
+	}
+	catch (e) {
+		helper.sess 'alert_message', e.message
+	}
+
+}
+
+helper.redirect 'index.groovy'

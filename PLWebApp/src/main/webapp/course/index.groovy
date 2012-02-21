@@ -40,12 +40,18 @@ alert_message = session.getAttribute('alert_message')?session.getAttribute('aler
 session.setAttribute('error_message', null)	
 session.setAttribute('alert_message', null)
 
-html.setDoubleQuotes(true)
+
+html.doubleQuotes = true
+html.expandEmptyElements = true
+html.omitEmptyAttributes = false
+html.omitNullAttributes = false
 html.html {
 	head {
+		meta ('http-equiv': 'Content-Type', content: 'text/html; charset=utf-8')
 		title("教材管理 - PLWeb")
 
 		link(href: "${helper.basehref}stylesheets/screen.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/silk-sprite.css", media: 'screen', rel: 'stylesheet', type: 'text/css')
 		link(href: "${helper.basehref}stylesheets/print.css", media: 'print', rel: 'stylesheet', type: 'text/css')
 		mkp.yieldUnescaped('<!--[if IE]>')
 		link(href: "${helper.basehref}stylesheets/ie.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
@@ -59,20 +65,20 @@ html.html {
 			div (class: 'alert_message', alert_message)
 		}
 		
-		h2("教材管理")
+		h1 ("教材管理")
 
-		a(href:'course_add.groovy') {
-			img (src:'../icons/application_add.png', border:0)
+		a (href: 'course_add.groovy') {
+			span (class: 'icons ss_application_add')
 			span ('新增教材')
 		}
 		hr()
 
 		p("教材清單如下")
 
-		table(width:"100%") {
+		table (width: '100%', class: 'fancy-table') {
 			tr {
-				th (width: 30, '#')
-				th ('教材代碼')
+				th (class: 'small', width: 30, '#')
+				th (class: 'small', '教材代碼')
 				th ('教材名稱')
 				th (width: 40, class: 'small', '數量')
 				th (width: 100, class: 'small', '容量')
@@ -96,11 +102,11 @@ html.html {
 				}
 				
 				tr (class: c%2==0?'even':'odd') {
-					td (align:'center', ++c)
+					td (align: 'center', class: 'small center', ++c)
 					td {
 						img (src:'../icons/application.png', border:0, class: 'icon')
-						a (href: href_select) {
-							span (row.course_name)
+						a (href: href_select, title: '列出教材單元') {
+							span (style: 'font-family:Courier New;font-weight:bold', row.course_name)
 						}
 					}
 					td (row.course_title)
@@ -121,7 +127,7 @@ html.html {
 					}
 					td (align: 'center', style: 'text-align:center') {
 						if (row.is_owner == 'y') {
-							a(class:'icon', href: href_remove, title: 'Remove', onclick: "return confirm('Are you sure?');") {
+							a(class:'icon', href: href_remove, title: 'Remove', onclick: "return confirm('是否確認要移除此教材?');") {
 								img (src:'../icons/application_delete.png', border:0)
 							}
 						}

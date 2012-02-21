@@ -1,7 +1,10 @@
+import org.plweb.webapp.helper.CommonHelper
+
+def helper = new CommonHelper(request, response, session)
 
 if (!session) {
-	response.sendRedirect('permission_denied.groovy')
-	return;
+	response.sendError 403
+	return
 }
 
 def utype = session.get('utype')
@@ -10,19 +13,33 @@ if (!['T', 'M'].contains(utype)) {
 	response.sendRedirect('permission_denied.groovy')
 }
 
-html.setDoubleQuotes(true)
+html.doubleQuotes = true
+html.expandEmptyElements = true
+html.omitEmptyAttributes = false
+html.omitNullAttributes = false
 html.html {
 	head {
-		title('PLWeb - 建立新課程')
-		link (rel:'stylesheet', type:'text/css', href:'../css/reset.css', media:'all')
-		link (rel: 'stylesheet', type: 'text/css', href: 'default.css')
+		meta ('http-equiv': 'Content-Type', content: 'text/html; charset=utf-8')
+		title('建立新課程 - PLWeb')
+		link(href: "${helper.basehref}stylesheets/screen.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/silk-sprite.css", media: 'screen', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/print.css", media: 'print', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<!--[if IE]>')
+		link(href: "${helper.basehref}stylesheets/ie.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<![endif]-->')
 	}
-	body (class: 'page') {
+	body (class: 'admin-layout') {
 		h1 ('建立新課程')
 
-		a (href: 'index.groovy', '返回課程管理')
+		a (href: 'index.groovy') {
+			span (class: 'icons ss_arrow_undo')
+			span ('返回課程管理')
+		}
 		span (' | ')
-		a (href: 'javascript:location.reload()', '重新整理')
+		a (href: 'javascript:location.reload()') {
+			span (class: 'icons ss_arrow_refresh')
+			span ('重新整理')
+		}
 		
 		hr()
 
@@ -114,9 +131,9 @@ html.html {
 					}
 				}
 				tr {
-					td (colspan: 2, align: 'center') {
-						input (type: 'submit', value: '確認送出')
-						a (href: 'index.groovy', '取消')
+					td (colspan: 2, align: 'center', class: 'center') {
+						input (class: 'fancy-button', type: 'submit', value: '確認送出')
+						a (class: 'fancy-button-gray', href: 'index.groovy', '取消')
 					}
 				}
 			}

@@ -25,11 +25,11 @@
 	<script type="text/javascript" src="${helper.basehref}js/jquery.jgrowl_minimized.js"></script>
 	<script type="text/javascript" src="${helper.basehref}dashboard/index.js"></script>
 </head>
-<body class="theme fancy-layout">
+<body class="fancy-layout">
 	<div class="page-wrapper">
 		<div class="header">
 			<a href="${helper.basehref}dashboard/" id="logo"><img class="plweb-logo" src="${helper.basehref}img/plweb_logo.png" alt="PLWeb Logo" /></a>
-			<div class="topNav">
+			<div class="topnav">
 				<div class="topLinks">
 					<span><%=helper.sess('uname')%>(<%=helper.sess('uemail')%>)</span>
 					<a href="account.groovy" class="embedded-link">個人帳號</a>

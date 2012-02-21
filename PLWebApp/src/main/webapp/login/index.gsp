@@ -25,11 +25,11 @@
 	<script type="text/javascript" src="${helper.basehref}login/index.js"></script>
 	<!--<script type="text/javascript" src="http://widgets.amung.us/tab.js"></script><script type="text/javascript">WAU_tab('kj5l1p82s0bf', 'bottom-left')</script>-->
 </head>
-<body class="theme fancy-layout">
+<body class="fancy-layout">
 	<div class="page-wrapper"><div class="page login-page">
 		<div class="header">
 			<a href="/" id="logo"><img class="plweb-logo" src="${helper.basehref}img/plweb_logo.png" alt="PLWeb Logo" border="0" /></a>
-			<div class="topNav">
+			<div class="topnav">
 				<div class="topLinks">
 					<a href="http://help.plweb.org/installation:jdk" class="embedded-link">Java 安裝設定</a>
 					|
@@ -63,8 +63,8 @@
 						</li>
 						<li>
 							<div style="text-align:right;line-height:1.25em;">
-								<a href="${response.encodeUrl('/login/index.groovy?m=account')}">忘記帳號？</a><br/>
-								<a href="${response.encodeUrl('/login/index.groovy?m=password')}">忘記密碼？</a>
+								<a class="sidebar-link-small" href="${response.encodeUrl('/login/index.groovy?m=account')}">忘記帳號？</a><br/>
+								<a class="sidebar-link-small" href="${response.encodeUrl('/login/index.groovy?m=password')}">忘記密碼？</a>
 							</div>
 						</li>
 						<li>

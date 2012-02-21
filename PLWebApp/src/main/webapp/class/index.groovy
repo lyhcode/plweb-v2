@@ -49,16 +49,23 @@ session.setAttribute('error_message', null)
 session.setAttribute('alert_message', null)
 
 html.doubleQuotes = true
+html.expandEmptyElements = true
+html.omitEmptyAttributes = false
+html.omitNullAttributes = false
 html.html {
 	head {
 		meta ('http-equiv': 'Content-Type', content: 'text/html; charset=utf-8')
 		title ('課程管理 - PLWeb')
-		link (rel: 'stylesheet', type: 'text/css', href: '../css/reset.css', media: 'all')
-		link (rel: 'stylesheet', type: 'text/css', href: '../css/default.css', media: 'all')
+		link(href: "${helper.basehref}stylesheets/screen.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/silk-sprite.css", media: 'screen', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/print.css", media: 'print', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<!--[if IE]>')
+		link(href: "${helper.basehref}stylesheets/ie.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<![endif]-->')
 		script (type: 'text/javascript', src: 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', '')
-		script (type: 'text/javascript', src: 'index.js', '')
+		script (type: 'text/javascript', src: 'index.js')
 	}
-	body (class: 'page') {
+	body (class: 'admin-layout') {
 		if (error_message) {
 			div (class: 'error_message', error_message)
 		}
@@ -69,23 +76,26 @@ html.html {
 		h1 ('課程管理')
 		
 		if ('T'.equalsIgnoreCase(utype)) {
-			a (href: 'class_open.groovy') {
-				img (src: '../icons/group_add.png', border: 0)
+			a (class: 'fancy-link', href: 'class_open.groovy') {
+				span (class: 'icons ss_group_add')
 				span ('建立新課程')
 			}
 			span('(教師專用)')
 			span(' | ', style: 'color: gray')
 		}
 		
-		a (href: 'class_join.groovy') {
-			img (src:'../icons/user_add.png', border: 0)
+		a (class: 'fancy-link', href: 'class_join.groovy') {
+			span (class: 'icons ss_user_add')
 			span ('選修課程')
 		}
 		span('(學生)')
 		span(' | ', style: 'color: gray')
 		
-		a (href: 'javascript:location.reload()', '重新整理')
-		
+		a (class: 'fancy-link', href: 'javascript:location.reload()') {
+			span (class: 'icons ss_arrow_refresh')
+			span ('重新整理')
+		}
+
 		hr ()
 
 		def rows = sql.rows(query1, [uid])
@@ -112,7 +122,7 @@ html.html {
 			}
 		}
 
-		table (width: '100%') {
+		table (width: '100%', class: 'fancy-table') {
 			tr {
 				th (width: 30, class: 'small', '#')
 				th (width: 60, class: 'small', '課程代碼')
@@ -149,7 +159,7 @@ html.html {
 					td (row.class_name)
 					td (class: 'small', "${row.school} / ${row.department}")
 					td (class: 'small') {
-						span (row.years)
+						span (style: 'font-family:Georgia', row.years)
 						span (' / ')
 						switch (row.semester) {
 						case '1':
@@ -171,24 +181,24 @@ html.html {
 					}
 					
 					if ('T'.equalsIgnoreCase(utype)) {
-						td (align: 'center') {
+						td (align: 'center', class: 'center') {
 							if ('y'.equalsIgnoreCase(row.IS_TEACHER)) {
 								a (href: href_schedule) {
-										img (src: '../icons/calendar.png', border: 0)
+									span (class: 'icons ss_calendar')
 								}
 							}
 						}
-						td (align: 'center') {
+						td (align: 'center', class: 'center') {
 							if ('y'.equalsIgnoreCase(row.IS_TEACHER)) {
 								a (href: href_edit) {
-										img (src: '../icons/group_edit.png', border: 0)
+									span (class: 'icons ss_group_edit')
 								}
 							}
 						}
-						td (align: 'center') {
+						td (align: 'center', class: 'center') {
 							if ('y'.equalsIgnoreCase(row.IS_TEACHER)) {
 								a (href: href_remove, onclick: "return confirm('請確認是否移除？');") {
-									img (src: '../icons/group_delete.png', border: 0)
+									span (class: 'icons ss_group_delete')
 								}
 							}
 						}
