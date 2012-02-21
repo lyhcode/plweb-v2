@@ -28,7 +28,7 @@
 <body class="theme fancy-layout">
 	<div class="page-wrapper"><div class="page login-page">
 		<div class="header">
-			<a href="/"><img class="plweb-logo" src="${helper.basehref}img/plweb_logo.png" alt="PLWeb Logo" border="0" /></a>
+			<a href="/" id="logo"><img class="plweb-logo" src="${helper.basehref}img/plweb_logo.png" alt="PLWeb Logo" border="0" /></a>
 			<div class="topNav">
 				<div class="topLinks">
 					<a href="http://help.plweb.org/installation:jdk" class="embedded-link">Java 安裝設定</a>
@@ -66,12 +66,15 @@
 								<a href="${response.encodeUrl('/login/index.groovy?m=account')}">忘記帳號？</a><br/>
 								<a href="${response.encodeUrl('/login/index.groovy?m=password')}">忘記密碼？</a>
 							</div>
-							<div class="desc">使用本功能可以協助您找回帳號或密碼！</div>
+						</li>
+						<li>
+							<!-- Facebook Like Box -->
+							<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FPLWeb-%25E7%25A8%258B%25E5%25BC%258F%25E8%25AA%259E%25E8%25A8%2580%25E5%25AD%25B8%25E7%25BF%2592%25E7%25B6%25B2%2F120529308003800&amp;width=240&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false&amp;appId=175500369215845" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:240px; height:62px;" allowTransparency="true"></iframe>
+							<div class="desc">
+							請訂閱 PLWeb 的 Facebook 專頁，提供您更多資訊及協助。
+							</div>
 						</li>
 					</ul>
-					
-					<!--facebook social widget--->
-					<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fplweb.org%2F&amp;layout=standard&amp;show_faces=true&amp;width=230&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:230px; height:80px; padding: 10px;" allowTransparency="true"></iframe>
 				</div>
 			</div></div>
 			<div class="content-center"><div class="content-center-inner">

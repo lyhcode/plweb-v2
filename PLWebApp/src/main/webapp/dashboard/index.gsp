@@ -28,8 +28,7 @@
 <body class="theme fancy-layout">
 	<div class="page-wrapper">
 		<div class="header">
-			<img class="plweb-logo" src="${helper.basehref}img/plweb_logo.png" alt="PLWeb Logo" />
-			
+			<a href="${helper.basehref}dashboard/" id="logo"><img class="plweb-logo" src="${helper.basehref}img/plweb_logo.png" alt="PLWeb Logo" /></a>
 			<div class="topNav">
 				<div class="topLinks">
 					<span><%=helper.sess('uname')%>(<%=helper.sess('uemail')%>)</span>
@@ -93,8 +92,8 @@
 				<%}%>
 				
 				
-				<!--facebook social widget--->
-				<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fplweb.org%2F&amp;layout=standard&amp;show_faces=true&amp;width=230&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:230px; height:80px; padding: 10px;" allowTransparency="true"></iframe>
+				<!-- Facebook Like Box -->
+				<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FPLWeb-%25E7%25A8%258B%25E5%25BC%258F%25E8%25AA%259E%25E8%25A8%2580%25E5%25AD%25B8%25E7%25BF%2592%25E7%25B6%25B2%2F120529308003800&amp;width=240&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false&amp;appId=175500369215845" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:240px; height:62px;" allowTransparency="true"></iframe>
 			</div></div>
 			
 			<div class="content-center"><div class="content-center-inner">

@@ -1,36 +1,35 @@
 import groovy.sql.Sql
 import groovy.xml.MarkupBuilder
-import javax.naming.InitialContext
 import org.plweb.webapp.helper.CommonHelper
 
 def helper = new CommonHelper(request, response)
 
-def ds = new InitialContext().lookup('java:comp/env/jdbc/plweb')
-def sql = new Sql(ds.connection)
+def sql = new Sql(helper.connection)
 
-id			= helper.fetch('id')
-name		= helper.fetch('name')
-school		= helper.fetch('school')
-department	= helper.fetch('department')
-password	= helper.fetch('password')
+def id				= helper.fetch('id')
+def name			= helper.fetch('name')
+def school			= helper.fetch('school')
+def department		= helper.fetch('department')
+def password		= helper.fetch('password')
+def displayOnMenu	= helper.fetch('displayOnMenu')=='y'?'y':'n'
 
-query1 = """
+def __UPDATE_SQL__ = """
 update ST_CLASS
 set CLASS_NAME=?,
 SCHOOL=?,
 DEPARTMENT=?,
-PASSWORD=?
+PASSWORD=?,
+DISPLAY_ON_MENU=?
 where CLASS_ID=?
 """
 
 try {
-	sql.executeUpdate(query1, [name, school, department, password, id])
+	sql.executeUpdate(__UPDATE_SQL__, [name, school, department, password, displayOnMenu, id])
+	session.setAttribute('alert_message', '已經更新一筆課程設定')
 }
 catch (e) {
 	session.setAttribute('error_message', e.message)
 }
-
-sql.close()
 
 response.sendRedirect('index.groovy')
 

@@ -16,6 +16,16 @@
 		<welcome-file>default.groovy</welcome-file>
 	</welcome-file-list>
 
+	<error-page>
+		<error-code>404</error-code>
+		<location>/errors/notfound.groovy</location>
+	</error-page>
+
+	<error-page>
+		<error-code>403</error-code>
+		<location>/errors/forbidden.groovy</location>
+	</error-page>
+
 	<resource-ref>
 		<description>PLWeb JDBC DataSourse</description>
 		<res-ref-name>jdbc/plweb</res-ref-name>
@@ -109,8 +119,4 @@
 		<url-pattern>*.gsp</url-pattern>
 	</servlet-mapping>
 	
-	<error-page>
-		<error-code>404</error-code>
-		<location>/error.groovy</location>
-	</error-page>
 </web-app>

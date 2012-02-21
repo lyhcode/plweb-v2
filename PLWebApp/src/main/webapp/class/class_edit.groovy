@@ -13,27 +13,26 @@ if (!session) {
 
 def id = helper.fetch('id')
 
-query1 = """
-select * from ST_CLASS where CLASS_ID=?
-"""
+def row = sql.firstRow('select * from ST_CLASS where CLASS_ID=?', [id])
 
-sql.eachRow(query1, [id]) {
-	name		= it.CLASS_NAME
-	school		= it.SCHOOL
-	department	= it.DEPARTMENT
-	password	= it.PASSWORD
-}
+def name		= row.CLASS_NAME
+def school		= row.SCHOOL
+def department	= row.DEPARTMENT
+def password	= row.PASSWORD
+def displayOnMenu = row.DISPLAY_ON_MENU
 
 html.doubleQuotes = true
 html.html {
 	head {
 		meta ('http-equiv': 'Content-Type', content: 'text/html; charset=utf-8')
 		title('修改課程設定 - PLWeb')
-		link (rel: 'stylesheet', type: 'text/css', href: '../css/reset.css', media: 'all')
-		link (rel: 'stylesheet', type: 'text/css', href: '../css/default.css', media: 'all')
-		script (type: 'text/javascript', src: 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', '')
+		link(href: "${helper.basehref}stylesheets/screen.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/print.css", media: 'print', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<!--[if IE]>')
+		link(href: "${helper.basehref}stylesheets/ie.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<![endif]-->')
 	}
-	body (class: 'page') {
+	body (class: 'admin-layout') {
 		h1 ('修改課程設定')
 
 		p ("課程代號：${id}")
@@ -58,7 +57,7 @@ html.html {
 					td ("${id} （唯讀）")
 				}
 				tr {
-					td ('課程名稱：')
+					td ('課程名稱:')
 					td {
 						input (name: 'name', value: name, style: 'width:100%')
 					}
@@ -70,22 +69,34 @@ html.html {
 					}
 				}
 				tr {
-					td ('授課系所：')
+					td ('授課系所:')
 					td {
 						input (name: 'department', value: department)
 					}
 				}
 				tr {
-					td ('密碼：')
+					td ('密碼:')
 					td {
 						input (type: 'password', name: 'password', value: password, autocomplete: 'off')
 						span ('（測驗專用）')
 					}
 				}
 				tr {
-					td (colspan: 2, align: 'center') {
-						input (type: 'submit', value: '儲存')
-						button ('取消', onclick: "location.href='index.groovy';return false")
+					td ('顯示設定:')
+					td {
+						if (displayOnMenu == 'y') {
+							input (type: 'checkbox', id: 'displayOnMenu', name: 'displayOnMenu', value: 'y', checked: 'checked')
+						}
+						else {
+							input (type: 'checkbox', id: 'displayOnMenu', name: 'displayOnMenu', value: 'y')
+						}
+						label (for: 'displayOnMenu', '顯示於課程選單')
+					}
+				}
+				tr {
+					td (colspan: 2, align: 'center', style: 'text-align:center') {
+						button (class: 'fancy-button', type: 'submit', '儲存')
+						button (class: 'fancy-button-gray', '取消', onclick: "location.href='index.groovy';return false")
 					}
 				}
 			}

@@ -38,10 +38,20 @@ a {
 }
 
 .fancy-button {
-	@include fancy-button(#124c89, 26px, 1em, 4px);
+	@include fancy-button(#124c89, 16px, 5em, 1px);
 }
 
+.fancy-button-gray {
+	@include fancy-button(#eeeeee, 16px, 5em, 1px);
+}
+
+
 .fancy-layout {
+
+	#logo {
+		margin-left: 15px;
+	}
+
 	.content-wrapper {
 		padding:0;
 		margin:0;

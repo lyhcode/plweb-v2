@@ -7,7 +7,6 @@ def helper = new CommonHelper(request, response, session)
 def sql = new Sql(helper.connection)
 
 // 清除登入錯誤顯示訊息
-
 helper.sess 'login_error', null
 
 // session data
@@ -22,13 +21,8 @@ if (!uid) {
 // 取得表單資料
 def email = helper.fetch('email')
 
-// sql queries
-query1 = """
-select COUNT(*) as USER_COUNT
-from ST_USER
-where LAST_UPDATE >= ?
-and IS_LOGIN='y'
-"""
+// 選單僅顯示2年內之課程
+def year = new Date().format('yyyy').toInteger()-2
 
 _SQL_CLASS_LIST = """
 	select b.*
@@ -36,9 +30,10 @@ _SQL_CLASS_LIST = """
 	inner join ST_CLASS b
 	on a.CLASS_ID=b.CLASS_ID
 	where a.USER_ID=?
-	and b.ALIVE='Y'
-	and b.SEMESTER<5
-	and b.YEARS >= 2010
+	and b.ALIVE='y'
+	and b.SEMESTER in (1,2,3,4)
+	and b.YEARS >= ${year}
+	and b.DISPLAY_ON_MENU = 'y'
 	order by b.CLASS_ID desc
 """
 
@@ -56,8 +51,17 @@ sql.eachRow(_SQL_CLASS_LIST, [uid]) {
 	]
 }
 
+//線上使用者計數
 def ucount = 0
 try {
+
+	def __SQL_USER_COUNT = '''
+select COUNT(*) as USER_COUNT
+from ST_USER
+where LAST_UPDATE >= ?
+and IS_LOGIN='y'
+'''
+
 	ucount = sql.firstRow(query1, [new Date().time-(300*1000)]).USER_COUNT
 }
 catch (e) {
