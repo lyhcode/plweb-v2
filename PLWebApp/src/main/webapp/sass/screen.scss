@@ -188,38 +188,46 @@ td.right, th.right {
 		border-top:1px solid #dadada;
 	}
 
-	.form-table th, .form-table td {
-		padding: .3em;
-		border-bottom: 1px solid #dadada;
+	.form-table {
+
+		th, td {
+			padding: .3em;
+			border-bottom: 1px solid #dadada;
+		}
+
+		th {
+			text-align: right;
+			font-weight: normal;
+			color: #3c3c3c;
+			font-size: .825em;
+		}
+
+		input.input-text {
+			font-size: 1.1em;
+			padding: .2em;
+			width: 360px;
+		}
+
+		label {
+			margin-right: .5em;
+			font-size: .825em;
+		}
+
+		.formDesc {
+			padding: 1em .5em;
+			font-size: 15px;
+			font-weight: bold;
+			@include single-text-shadow(#cccccc, 2px, 2px, 2px);
+		}
+
+		.roletype-desc {
+		    padding: .2em;
+		    color: #555555;
+		    font-size: .825em;
+		}
+
 	}
 
-	.form-table th {
-		text-align: right;
-		font-weight: normal;
-		color: #3c3c3c;
-		font-size: .825em;
-	}
-
-	.form-table input.input-text {
-		font-size: 1.1em;
-		padding: .2em;
-		width: 360px;
-	}
-
-	.form-table label {
-		margin-right: .5em;
-		font-size: .825em;
-	}
-
-	.form-table .formDesc {
-		font-size: .935em;
-	}
-
-	.form-table .roletype-desc {
-	    padding: .2em;
-	    color: #555555;
-	    font-size: .825em;
-	}
 	.signup-error li {
 		color: #aa0000;
 		font-weight: bold;
@@ -277,6 +285,7 @@ td.right, th.right {
 	}
 
 	p.more-about-fields {
+		padding: .5em;
 		font-size: 13px;
 		color: #555555;
 		line-height: 1.8em;

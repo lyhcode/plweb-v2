@@ -17,7 +17,8 @@ helper = request.get('helper')
 		<tr>
 		    <th>驗證碼:</th>
 		    <td>
-		        ${helper.attr('reCaptcha')}
+		        <input type="hidden" name="recaptcha_public_key" value="${helper.attr('recaptcha_public_key')}" />
+		        <div id="recaptcha_element"></div>
 		    </td>
 		</tr>
         <% if (helper.attr('password_errormsg') != null) { %>

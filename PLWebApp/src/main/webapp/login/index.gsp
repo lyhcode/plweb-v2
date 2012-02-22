@@ -8,6 +8,9 @@
 	<title>PLWeb 程式設計練習系統 2.0</title>
 	${helper.htmlhead()}
 
+	<!--reCAPTCHA-->
+	<script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+
 	<!-- Compass -->
 	<link href="${helper.basehref}stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
 	<link href="${helper.basehref}stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />

@@ -27,9 +27,9 @@ roleOptions << [value: 'A', display: '作者', checked: 'A'.equals(roletype), de
 <form action="${response.encodeUrl('/login/signup_save.groovy')}#errormsg" method="post" class="form-signup" autocomplete="off">
 	<input type="hidden" name="module" value="signup" />
 	
-	<table class="form-table" width="100%" cellpadding="0" cellspacing="0">
+	<table class="form-table" width="100%">
 		<tr>
-			<td colspan="2" class="formDesc"><b>必填</b></td>
+			<td colspan="2" class="formDesc">必填</td>
 		</tr>
 		<tr>
 			<th width="120">註冊身分:</th>
@@ -83,12 +83,13 @@ roleOptions << [value: 'A', display: '作者', checked: 'A'.equals(roletype), de
 		<tr>
 		    <th>驗證碼:</th>
 		    <td>
-		        <div>${helper.attr('reCaptcha')}</div>
-				<p class="more-about-fields">若無法辨識文字，請按 <img src="http://www.google.com/recaptcha/api/img/red/refresh.gif" /> 按鈕更換驗證碼。</p>
+	        	<input type="hidden" name="recaptcha_public_key" value="${helper.attr('recaptcha_public_key')}" />
+		        <div id="recaptcha_element"></div>
+				<p class="more-about-fields">若無法辨識文字，請按 <img src="http://www.google.com/recaptcha/api/img/white/refresh.gif" /> 按鈕更換驗證碼。</p>
 		    </td>
 		</tr>
 		<tr>
-			<td colspan="2" class="formDesc"><b>身份確認</b></td>
+			<td colspan="2" class="formDesc">身份確認</td>
 		</tr>
 		<tr>
 			<td colspan="2"><p class="more-about-fields">身分選擇<b>教師</b>請填寫學校、系所及連絡電話，選擇<b>作者</b>請務必填寫連絡電話。此兩種身分須經人工審核作業，為加速審核通過請留正確資料。</p></td>
@@ -113,7 +114,7 @@ roleOptions << [value: 'A', display: '作者', checked: 'A'.equals(roletype), de
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" class="formDesc"><b>選填</b></td>
+			<td colspan="2" class="formDesc">選填</td>
 		</tr>
 		<tr>
 			<th>課程代號:</th>

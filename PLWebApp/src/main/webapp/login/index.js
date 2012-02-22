@@ -61,6 +61,15 @@ $(document).ready(function() {
 		        $('.roletype-desc').hide();
 		        $('#roletype-desc-'+v).show();
 		});
+
+		Recaptcha.create(
+			$('input[name="recaptcha_public_key"]').val(),
+			"recaptcha_element",
+			{
+				theme: "white",
+				callback: Recaptcha.focus_response_field
+			}
+		);
 		
 		var v = $('input[name=roletype]:checked').val();
 		$('.roletype-desc').hide();
@@ -78,6 +87,15 @@ $(document).ready(function() {
 	
     var password_init = function() {
 	    $('input.input-text').tipsy({trigger: 'focus', gravity: 'w'});
+
+	    Recaptcha.create(
+			$('input[name="recaptcha_public_key"]').val(),
+			"recaptcha_element",
+			{
+				theme: "white",
+				callback: Recaptcha.focus_response_field
+			}
+		);
 	};
 	
 	var m = $('input[name=module]').val();
