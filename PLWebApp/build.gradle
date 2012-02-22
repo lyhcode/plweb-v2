@@ -60,6 +60,7 @@ dependencies {
 
 task sync(type:Exec) {
     workingDir '.'
+    standardOutput System.out
     commandLine 'make', 'sync'
 }
 

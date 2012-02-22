@@ -5,6 +5,39 @@
 	
 	<display-name>plweb.webapp</display-name>
 
+	<context-param>
+		<param-name>recaptcha_private_key</param-name>
+		<param-value>6LfVocMSAAAAAHvhuNUHuPIZYRgEhygpG3pnpVOk</param-value>
+	</context-param>
+	<context-param>
+		<param-name>recaptcha_public_key</param-name>
+		<param-value>6LfVocMSAAAAANwnuKgRfnnMEv6Fx8yU-h_X53xl</param-value>
+	</context-param>
+	<context-param>
+		<param-name>mail_host</param-name>
+		<param-value>smtp.gmail.com</param-value>
+	</context-param>
+	<context-param>
+		<param-name>mail_port</param-name>
+		<param-value>465</param-value>
+	</context-param>
+	<context-param>
+		<param-name>mail_ssl</param-name>
+		<param-value>on</param-value>
+	</context-param>
+	<context-param>
+		<param-name>mail_user</param-name>
+		<param-value>admin@plweb.org</param-value>
+	</context-param>
+	<context-param>
+		<param-name>mail_password</param-name>
+		<param-value>stainma221</param-value>
+	</context-param>
+	<context-param>
+		<param-name>mail_from</param-name>
+		<param-value>"PLWeb" &lt;admin@plweb.org&gt;</param-value>
+	</context-param>
+
 	<welcome-file-list>
 		<welcome-file>index.groovy</welcome-file>
 		<welcome-file>index.html</welcome-file>

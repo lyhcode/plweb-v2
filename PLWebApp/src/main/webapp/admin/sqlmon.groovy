@@ -1,20 +1,30 @@
-import groovy.sql.Sql
 import groovy.xml.MarkupBuilder
-import javax.naming.InitialContext
+import org.plweb.webapp.helper.CommonHelper
 
-def ds = new InitialContext().lookup("java:comp/env/jdbc/plweb")
+def helper = new CommonHelper(request, response, session)
 
+def ds = helper.dataSource
+
+html.doubleQuotes = true
+html.expandEmptyElements = true
+html.omitEmptyAttributes = false
+html.omitNullAttributes = false
 html.html {
 	head {
-		title('PLWeb - Database Monitor')
-		link (rel: 'stylesheet', type: 'text/css', href: 'default.css', media: 'all')
-		script(type: 'text/javascript', src: 'class_admin.js', '')
+		meta ('http-equiv': 'Content-Type', content: 'text/html; charset=utf-8')
+		title('資料庫連線監控 - PLWeb')
+		link(href: "${helper.basehref}stylesheets/screen.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/silk-sprite.css", media: 'screen', rel: 'stylesheet', type: 'text/css')
+		link(href: "${helper.basehref}stylesheets/print.css", media: 'print', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<!--[if IE]>')
+		link(href: "${helper.basehref}stylesheets/ie.css", media: 'screen, projection', rel: 'stylesheet', type: 'text/css')
+		mkp.yieldUnescaped('<![endif]-->')
 	}
-	body {
-		h2("Database Monitor")
+	body (class: 'admin-layout') {
+		h1 ("Database Monitor")
 		hr ()
-		h3 ('Datasource Properties')
-		table (width: '100%') {
+		h2 ('Datasource Properties')
+		table (width: '100%', class: 'fancy-table') {
 			tr {
 				th ('Default Auto-commit')
 				td (ds.defaultAutoCommit)
@@ -69,9 +79,12 @@ html.html {
 				td (ds.validationQuery)
 			}
 		}
+		
 		hr ()
-		h3("Max/Min/Num Counters")
-		table(width:"100%") {
+
+		h3('Max/Min/Num Counters')
+		
+		table (width: "100%", class: 'fancy-table') {
 			tr {
 				th ("Type")
 				th ("Max.")

@@ -1,10 +1,10 @@
 import groovy.sql.Sql
-import org.plweb.webapp.helper.CommonHelper
 import java.text.DecimalFormat
+import org.plweb.webapp.helper.CommonHelper
 
-helper = new CommonHelper(request, response, session)
+def helper = new CommonHelper(request, response, session)
 
-email = helper.fetch('email')
+def email = helper.fetch('email')
 
 query1 = """
 select COUNT(*) as USER_COUNT

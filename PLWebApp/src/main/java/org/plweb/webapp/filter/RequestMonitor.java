@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 
 public class RequestMonitor implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
@@ -20,17 +21,21 @@ public class RequestMonitor implements Filter {
 
 		long t1 = System.currentTimeMillis();
 
-		chain.doFilter(request, res);
+		HttpServletResponseWrapper httpRes = new HttpServletResponseWrapper(res);
+
+		httpRes.addHeader("X-UA-Compatible", "chrome=1");
+
+		chain.doFilter(req, httpRes);
 
 		long diff = System.currentTimeMillis() - t1;
 
-		if (diff >= 500) {
+		if (diff >= 1000) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("*** request (");
 			sb.append(req.getRequestURI());
 			sb.append(") finished with time(ms): ");
 			sb.append(diff);
-			
+
 			System.out.println(sb.toString());
 		}
 	}
