@@ -2,10 +2,10 @@ import groovy.sql.Sql
 import groovy.xml.MarkupBuilder
 import org.plweb.webapp.helper.CommonHelper
 
-helper = new CommonHelper(request, response, session)
+def helper = new CommonHelper(request, response, session)
 
-uid		= helper.sess('uid')
-uname	= helper.sess('uname')
+def uid		= helper.sess('uid')
+def uname	= helper.sess('uname')
 
 if (!session) {
 	response.sendError 403
@@ -189,5 +189,3 @@ html.div {
 		img (src: helper.make_url('http://chart.apis.google.com/chart', [cht: 'p3', 'chd': "t:${chd}", chs: '560x160', chl: "${chl}", chco: "${chco}", chdl: "${chdl}", chdls: "000000,16"]))
 	}
 }
-
-sql.close()

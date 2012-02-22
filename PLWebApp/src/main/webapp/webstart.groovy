@@ -1,28 +1,29 @@
 import groovy.sql.Sql
 import groovy.xml.MarkupBuilder
-import javax.naming.InitialContext
 import org.plweb.webapp.helper.CommonHelper
 
-helper = new CommonHelper(request, response, session)
+def helper = new CommonHelper(request, response, session)
 
 if (!session) {
-	response.sendRedirect('permission_denied.groovy')
-	return;
+	response.sendError 403
+	return
 }
 
-uid	  = session.get('uid')
-uname = session.get('uname')
-utype = session.get('utype')
+def uid	  = session.get('uid')
+def uname = session.get('uname')
+def utype = session.get('utype')
 
 if (!uid) {
-	response.sendRedirect('permission_denied.groovy')
-	return;
+	response.sendError 403
+	return
 }
 
-course_id = request.getParameter('course_id')
-class_id  = request.getParameter('class_id')
-lesson_id = request.getParameter('lesson_id')
-mode      = request.getParameter('mode')
+def course_id = request.getParameter('course_id')
+def class_id  = request.getParameter('class_id')
+def lesson_id = request.getParameter('lesson_id')
+def mode      = request.getParameter('mode')
+
+def cdn = helper.fetch('cdn')!=null
 
 // 80 port防止存取課號為5(測驗課號)
 /*
@@ -45,12 +46,17 @@ packPath = request.getRealPath('/suite')
 plugPath = request.getRealPath('/suite/plugins')
 dataPath = request.getRealPath('/data')
 
-sql = new Sql(helper.connection)
+def sql = new Sql(helper.connection)
 
-server_host = request.getServerName()
-server_port = request.getServerPort()
+def server_host = request.serverName
+def server_port = request.serverPort
 
-codebase = server_host=='localhost'?"http://${server_host}:${server_port}/plwebstart/":'http://cdn.plweb.org/plwebstart/'
+def codebase = "http://${server_host}:${server_port}/plwebstart/"
+
+if (cdn) {
+	codebase = "http://cloud1.plweb.org/plwebstart/"
+}
+
 version  = "suite-20080918001"
 
 //產生WS_TICKET
@@ -160,7 +166,7 @@ println '<?xml version="1.0" encoding="UTF-8"?>';
 
 xml = new MarkupBuilder(response.getWriter())
 xml.setDoubleQuotes(true);
-xml.jnlp(spec:"1.6+", codebase: codebase) {
+xml.jnlp(spec: 1.6, codebase: codebase) {
 	information() {
 		title("Programming Teaching Assistant")
 		vendor("PLWeb")
@@ -170,7 +176,7 @@ xml.jnlp(spec:"1.6+", codebase: codebase) {
 		"all-permissions"()
 	}
 	resources() {
-		j2se(version: '1.6+')
+		j2se(version: 1.6)
 		
 		//jar(href: 'suite-webstart.jar')
 		//jar(href: 'suite-common.jar')

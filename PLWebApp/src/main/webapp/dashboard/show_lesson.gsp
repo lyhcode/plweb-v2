@@ -26,29 +26,29 @@
 
 		<div class="lesson-toolbar-control">
 			<%if (helper.attr('allow_editor')) {%>
-			<button class="btn-control" onclick="location.href='${helper.attr('editor_url')}'">
-				<img src="icon-16/plugin_edit.png" alt="editor"/>
+			<a class="fancy-button" href="${helper.attr('editor_url')}">
+				<span class="icons ss_plugin_edit"></span>
 				<span>開始練習</span>
-			</button>
+			</a>
 			<%}%>
 			
-			<button class="btn-control ajax-load-state" onclick="ajax_load_state('${helper.attr('class_id')}', '${helper.attr('course_id')}', '${helper.attr('lesson_id')}')" title="Refresh states">
-				<img src="icon-16/chart_bar.png" alt="chart_bar"/>
+			<a class="fancy-button-gray ajax-load-state" href="#" onclick="ajax_load_state('${helper.attr('class_id')}', '${helper.attr('course_id')}', '${helper.attr('lesson_id')}');return false;" title="更新狀態">
+				<span class="icons ss_chart_bar"></span>
 				<span>更新狀態</span>
-			</button>
+			</a>
 			
 			<%if (helper.attr('is_show_answer') && helper.attr('answer_url')) {%>
-			<button class="btn-control" onclick="ajax_load_answer('${helper.attr('course_id')}', '${helper.attr('lesson_id')}')">
-				<img src="icon-16/plugin_edit.png" alt="answer"/>
-				<span>觀看解答</span>
-			</button>
+				<a class="fancy-button-gray embedded-link" href="${helper.attr('answer_url')}" target="_blank" title="觀看解答">
+					<span class="icons ss_chart_bar"></span>
+					<span>觀看解答</span>
+				</a>
 			<%}%>
 			
 			<%if (helper.attr('is_teacher')) {%>
-			<button class="btn-control" onclick="fancybox_link('${helper.attr('report_url')}', {type: 'iframe', overlayShow: true, autoScale: true, width: '90%', height: '90%'})">
-				<img src="icon-16/chart_bar.png" alt="report"/>
-				<span>查看練習進度(教師專用)</span>
-			</button>
+				<a class="fancy-button-gray embedded-link" href="${helper.attr('report_url')}" target="_blank" title="查看練習進度">
+					<span class="icons ss_chart_bar"></span>
+					<span>查看練習進度</span>
+				</a>
 			<%}%>
 		</div>
 	</div>

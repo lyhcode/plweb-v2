@@ -7,6 +7,7 @@
 
 	<!-- Compass -->
 	<link href="${helper.basehref}stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="${helper.basehref}stylesheets/silk-sprite.css" media="screen, projection" rel="stylesheet" type="text/css" />
 	<link href="${helper.basehref}stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
 	<!--[if IE]>
 	<link href="${helper.basehref}stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -35,10 +36,10 @@
 					<a href="account.groovy" class="embedded-link">個人帳號</a>
 					<%if(helper.attr('is_admin')){%>
 					|
-					<a href="admin/index.groovy" class="new-window-link" target="_blank">系統管理</a>
+					<a href="admin/index.groovy" class="embedded-link" target="_blank">系統管理</a>
 					<%}%>
 					|
-					<a href="http://wiki.plweb.org/" class="" target="_blank">線上教材</a>
+					<a href="http://wiki.plweb.org/" class="new-window-link" target="_blank">線上教材</a>
 					|
 					<a href="http://help.plweb.org/installation:jdk" class="embedded-link" target="_blank">Java 安裝設定</a>
 					|
@@ -53,10 +54,10 @@
 							<span><a href="${response.encodeUrl('dashboard/index.groovy')}" class="link-item">我的課程</a></span>
 						</li>
 						<li>
-							<span><a href="${helper.basehref}class/index.groovy" class="link-item new-window-link" target="_blank">課程管理</a></span>
-						</li>			
+							<span><a href="${helper.basehref}class/index.groovy" class="link-item embedded-link" target="_blank">課程管理</a></span>
+						</li>
 						<li>
-							<span><a href="${helper.basehref}course/index.groovy" class="link-item new-window-link" target="_blank">教材管理</a></span>
+							<span><a href="${helper.basehref}course/index.groovy" class="link-item embedded-link" target="_blank">教材管理</a></span>
 						</li>
 						<li>
 							<span><a href="exam/exam.groovy" class="link-item embedded-link">測驗模式</a></span>

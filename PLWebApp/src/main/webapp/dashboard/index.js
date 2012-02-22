@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	var show_lesson_init = function() {
 		
-		$('button.ajax-load-state').click();
+		$('.ajax-load-state').click();
 	};
 
 	var m = $('input[name=module]').val();
@@ -59,32 +59,6 @@ function change_datetime(target, type, class_id, course_id, lesson_id) {
 			}
 		});
 	}
-}
-
-/**
- * Load answer content using jQuery Ajax
- * @param course_id
- * @param lesson_id
- */
-function ajax_load_answer(course_id, lesson_id) {
-	fancybox_link('panel.lesson/ajax_load_answer.groovy?course_id='+course_id+'&lesson_id='+lesson_id);
-//	$('div.lesson-answer-panel').show();
-//	
-//	$.ajax({
-//		url : 'panel.lesson/ajax_load_answer.groovy',
-//		type : 'POST',
-//		data: { 
-//			course_id: course_id,
-//			lesson_id: lesson_id
-//		},
-//		error : function(xhr) {
-//			alert(xhr);
-//		},
-//		success : function(response) {
-//			$('div.html-lesson-answer').html(response);
-//			$('div.html-content-string').hide();
-//		}
-//	});
 }
 
 function ajax_load_state(class_id, course_id, lesson_id) {

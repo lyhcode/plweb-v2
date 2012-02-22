@@ -78,7 +78,7 @@ if (row.CLOSEDATE != null) {
 is_show_answer = 'y'.equalsIgnoreCase(row.IS_SHOW_ANSWER)
 
 allow_editor = false
-editor_url = helper.make_url('webstart.groovy', [mode: 'student', course_id: course_id, lesson_id: lesson_id, class_id: class_id, '_t': new Date().time], true)
+editor_url = helper.make_url('webstart.groovy', [mode: 'student', course_id: course_id, lesson_id: lesson_id, class_id: class_id, cdn: true, '_t': new Date().time], true)
 
 now = new Date().time
 
@@ -96,7 +96,8 @@ answer_url = null
 
 if (is_teacher || (row.DUEDATE != null && row.DUEDATE.toLong() <= now)) {
 	allow_answer = true
-	answer_url = helper.make_url('webstart.groovy', [mode: 'answer', course_id: course_id, lesson_id: lesson_id, class_id: class_id], true)
+	answer_url = "${helper.basehref}dashboard/answer.groovy?course_id=${course_id}&lesson_id=${lesson_id}"
+	//answer_url = helper.make_url('webstart.groovy', [mode: 'answer', course_id: course_id, lesson_id: lesson_id, class_id: class_id], true)
 }
 
 //辨認測驗模式設定
@@ -129,8 +130,6 @@ else {
 	<p>教材內容未設定！</p>
 	"""
 }
-
-sql.close()
 
 //html_content = "no contents"
 //html_content = helper.http_fetch('http://wiki.plweb.org/index.php?title=Scheme/Activate_Thinking_in_Scheme/Chapter01&action=render')
