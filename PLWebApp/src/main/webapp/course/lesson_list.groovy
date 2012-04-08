@@ -127,7 +127,7 @@ html.html {
 				
 				href_export	= "lesson_export.groovy?course_id=${row.course_id}&lesson_id=${row.lesson_id}"
 				href_play   = "javascript: lessonPlay('${row.course_id}', '${row.lesson_id}');"
-				href_edit	= "webstart.groovy?mode=author&course_id=${row.course_id}&lesson_id=${row.lesson_id}&class=0"
+				href_edit	= "/webstart.groovy?mode=author&course_id=${row.course_id}&lesson_id=${row.lesson_id}&class=0"
 				href_up		= "lesson_up.groovy?course_id=${row.course_id}&lesson_id=${row.lesson_id}"
 				href_down	= "lesson_down.groovy?course_id=${row.course_id}&lesson_id=${row.lesson_id}"
 				href_copy	= "lesson_copy.groovy?course_id=${row.course_id}&lesson_id=${row.lesson_id}"

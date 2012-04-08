@@ -22,11 +22,12 @@
   
   <hr/>
 
-  <p>安裝 Google Chrome Frame 可以全面提昇 Internet Explorer 瀏覽器的速度及安全性。</p>
+  <p>安裝 Google Chrome Frame 可以全面提昇舊版 Internet Explorer 瀏覽器的速度及安全性。</p>
 
-  <button class="fancy-button" onclick="CFInstall.check({mode: 'overlay', destination: '${helper.basehref}'});">開始安裝</button>
-  <a href="index.groovy" class="fancy-button-gray">取消</a>
+  <iframe width="800" height="480" src="http://www.google.com/chromeframe/eula.html?prefersystemlevel=true" />
 
+  <!--<button class="fancy-button" onclick="CFInstall.check({mode: 'overlay', destination: '${helper.basehref}'});">開始安裝</button>
+  <a href="index.groovy" class="fancy-button-gray">取消</a>-->
 
   <script type="text/javascript" 
    src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>

@@ -53,9 +53,11 @@ def server_port = request.serverPort
 
 def codebase = "http://${server_host}:${server_port}/plwebstart/"
 
-if (cdn) {
+/*
+if (cdn && server_host != 'localhost') {
 	codebase = "http://cloud1.plweb.org/plwebstart/"
 }
+*/
 
 version  = "suite-20080918001"
 
@@ -122,7 +124,11 @@ props = [
  	"plweb.var.lesson_id"	: lesson_id,
  	"plweb.var.class_id"	: class_id,
 
-    "file.encoding"         : 'UTF-8'
+    "file.encoding"         : 'UTF-8',
+    "user.language"         : 'zh',
+    "user.region"           : 'TW',
+    "javaws.user.language"         : 'zh',
+    "javaws.user.region"           : 'TW'
 ]
 
 props_windows = [
@@ -166,7 +172,7 @@ println '<?xml version="1.0" encoding="UTF-8"?>';
 
 xml = new MarkupBuilder(response.getWriter())
 xml.setDoubleQuotes(true);
-xml.jnlp(spec: 1.6, codebase: codebase) {
+xml.jnlp(spec: '1.6+', codebase: codebase) {
 	information() {
 		title("Programming Teaching Assistant")
 		vendor("PLWeb")
@@ -176,7 +182,7 @@ xml.jnlp(spec: 1.6, codebase: codebase) {
 		"all-permissions"()
 	}
 	resources() {
-		j2se(version: 1.6)
+		j2se(version: '1.6+')
 		
 		//jar(href: 'suite-webstart.jar')
 		//jar(href: 'suite-common.jar')
@@ -215,58 +221,58 @@ xml.jnlp(spec: 1.6, codebase: codebase) {
 		}
 	}
 	resources(os: 'Windows', arch: 'amd64') {
-		nativelib (href: 'swt/swt-3.7.1-win32-win32-x86_64.jar')
+		jar (href: 'swt/swt-3.7.1-win32-win32-x86_64.jar')
 		props_windows.each {
 			property(name: it.key, value: it.value)
 		}
 	}
     resources(os: 'Windows', arch: 'x86_64') {
-		nativelib (href: 'swt/swt-3.7.1-win32-win32-x86_64.jar')
+		jar (href: 'swt/swt-3.7.1-win32-win32-x86_64.jar')
 		props_windows.each {
 			property(name: it.key, value: it.value)
 		}
 	}
 	resources(os: 'Windows', arch: 'x86') {
-		nativelib (href: 'swt/swt-3.7.1-win32-win32-x86.jar')
+		jar (href: 'swt/swt-3.7.1-win32-win32-x86.jar')
 		props_windows.each {
 			property(name: it.key, value: it.value)
 		}
 	}
 	resources(os: 'Linux', arch: 'x86_64') {
-		nativelib (href: 'swt/swt-3.7.1-gtk-linux-x86_64.jar')
+		jar (href: 'swt/swt-3.7.1-gtk-linux-x86_64.jar')
 		props_linux.each {
 			property(name: it.key, value: it.value)
 		}
 	}
     resources(os: 'Linux', arch: 'amd64') {
-		nativelib (href: 'swt/swt-3.7.1-gtk-linux-x86_64.jar')
+		jar (href: 'swt/swt-3.7.1-gtk-linux-x86_64.jar')
 		props_linux.each {
 			property(name: it.key, value: it.value)
 		}
 	}
 	resources(os: 'Linux', arch: 'x86') {
-		nativelib (href: 'swt/swt-3.7.1-gtk-linux-x86.jar')
+		jar (href: 'swt/swt-3.7.1-gtk-linux-x86.jar')
 		props_linux.each {
 			property(name: it.key, value: it.value)
 		}
 	}
     resources(os: 'Mac', arch: 'x86_64') {
-        j2se (version: 1.6, 'java-vm-args': '-XstartOnFirstThread -Xdebug')
-		nativelib (href: 'swt/swt-3.7.1-cocoa-macosx-x86_64.jar')
+        j2se (version: '1.6+', 'java-vm-args': '-XstartOnFirstThread -Xdebug')
+		jar (href: 'swt/swt-3.7.1-cocoa-macosx-x86_64.jar')
 		props_mac.each {
 			property(name: it.key, value: it.value)
 		}
 	}
     resources(os: 'Mac', arch: 'amd64') {
-        j2se (version: 1.6, 'java-vm-args': '-XstartOnFirstThread')
-		nativelib (href: 'swt/swt-3.7.1-cocoa-macosx-x86_64.jar')
+        j2se (version: '1.6+', 'java-vm-args': '-XstartOnFirstThread')
+		jar (href: 'swt/swt-3.7.1-cocoa-macosx-x86_64.jar')
 		props_mac.each {
 			property(name: it.key, value: it.value)
 		}
 	}
     resources(os: 'Mac', arch: 'x86') {
-        j2se (version: 1.6, 'java-vm-args': '-XstartOnFirstThread')
-		nativelib (href: 'swt/swt-3.7.1-cocoa-macosx.jar')
+        j2se (version: '1.6+', 'java-vm-args': '-XstartOnFirstThread')
+		jar (href: 'swt/swt-3.7.1-cocoa-macosx.jar')
 		props_mac.each {
 			property(name: it.key, value: it.value)
 		}

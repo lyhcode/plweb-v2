@@ -66,6 +66,20 @@ task deploy(dependsOn: 'jar') << {
     }
 }
 
+jar.dependsOn 'native2ascii'
+
+task native2ascii << {
+	ant.delete() {
+		fileset(dir: "${processResources.destinationDir}") {
+			include(name: 'Messages*.properties')
+		}
+	}
+	ant.native2ascii(src: 'src/main/resources/',
+			dest: "${processResources.destinationDir}",
+			includes: '**/Messages*.properties',
+			encoding: 'UTF-8')
+}
+
 task sync(type:Exec) {
     workingDir '.'
     commandLine 's3cmd', '-P', 'sync', './plwebstart', 's3://cdn.plweb.org/'

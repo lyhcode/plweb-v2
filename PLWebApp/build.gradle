@@ -58,12 +58,6 @@ dependencies {
     runtime files ('../PLWebXML/build/libs/plwebxml-1.0.jar')
 }
 
-task sync(type:Exec) {
-    workingDir '.'
-    standardOutput System.out
-    commandLine 'make', 'sync'
-}
-
 def defaultEncoding = 'UTF-8'
 
 [compileJava, compileTestJava]*.options*.encoding = defaultEncoding

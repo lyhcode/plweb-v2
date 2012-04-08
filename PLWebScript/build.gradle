@@ -23,7 +23,7 @@ dependencies {
     //compile 'org.apache.ant:ant:1.8.2'
 
     // PLWeb Libraries
-    compile files ('../PLWebXML/build/libs/plwebxml-1.0.jar')
+    compile files('../PLWebXML/build/libs/plwebxml-1.0.jar')
 }
 
 def defaultEncoding = 'UTF-8'

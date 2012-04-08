@@ -5,11 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.MessageDigest;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -27,7 +24,7 @@ public class LoaderJFrame extends JFrame {
 	private String diskRoot = env.getDiskRoot();
 	private File jEditHome = new File(diskRoot, env.getJEditPath());
 
-	private Message msg;
+	private MessagePrinter msg;
 
 	public LoaderJFrame() {
 		DefaultListModel listModel = new MessageListModel();
@@ -39,8 +36,11 @@ public class LoaderJFrame extends JFrame {
 		listComp.setAutoscrolls(true);
 		listComp.setFocusable(false);
 		listComp.setVisibleRowCount(100);
-
-		msg = new Message(listModel, listComp);
+		
+		msg = new MessagePrinter(listModel, listComp);
+		msg.render("test");
+		
+		
 		JLabel labelComp;
 		try {
 			labelComp = new JLabel(new ImageIcon(new URL(env.getAdImage())));
@@ -48,7 +48,7 @@ public class LoaderJFrame extends JFrame {
 			labelComp = new JLabel("AD-NOT-FOUND");
 		}
 		labelComp.setPreferredSize(new Dimension(400, 100));
-		setTitle("PLWeb WebStart Loader");
+		setTitle("PLWeb WebStart");
 		setLayout(new BorderLayout());
 		add(labelComp, BorderLayout.NORTH);
 		add(listComp, BorderLayout.CENTER);
@@ -76,7 +76,7 @@ public class LoaderJFrame extends JFrame {
 			setVisible(false);
 
 		} catch (Exception ex) {
-			msg.print(ex.getMessage());
+			msg.println(ex.getMessage());
 		}
 	}
 
@@ -106,7 +106,7 @@ public class LoaderJFrame extends JFrame {
 			boolean downloaded = false;
 
 			if (tempPlugin.exists()) {
-				msg.print("Plug-in Checksum [" + pluginName + "]: ");
+				msg.println("Plug-in Checksum [" + pluginName + "]: ");
 
 				String asc = pluginsAsc[i];
 				if (asc != null) {
@@ -123,7 +123,7 @@ public class LoaderJFrame extends JFrame {
 			}
 
 			if (!downloaded) {
-				msg.print("Plug-in Download [" + pluginName + "]: ");
+				msg.println("Plug-in Download [" + pluginName + "]: ");
 
 				HttpDownloaderRunnable run = new HttpDownloaderRunnable(plugin,
 						tempPlugin);
@@ -164,7 +164,7 @@ public class LoaderJFrame extends JFrame {
 		boolean downloaded = false;
 
 		if (filePackage.exists()) {
-			msg.print("Package Checksum [" + packageName + "]: ");
+			msg.println("Package Checksum [" + packageName + "]: ");
 
 			String asc = env.getUrlPackageAsc();
 			if (asc != null) {
@@ -181,26 +181,24 @@ public class LoaderJFrame extends JFrame {
 		}
 
 		if (!downloaded) {
-			msg.print("Package Download [" + packageName + "]: ");
+			msg.println("Package Download [" + packageName + "]: ");
 
 			HttpDownloaderRunnable run;
 			run = new HttpDownloaderRunnable(urlPackage, filePackage);
 
 			Thread thread = new Thread(run);
 			thread.start();
-
-			int n = 0;
+			
 			while (thread.isAlive()) {
 				msg.update(String.valueOf(run.getLength()) + " bytes");
 				Thread.sleep(200);
-				n++;
 			}
 
 			msg.update(String.valueOf(filePackage.length() / 1204) + " Kbytes");
 		}
 
 		// *** 解壓縮jEdit
-		msg.print("Extracting to ".concat(jEditHome.getPath()));
+		msg.println("Extracting to ".concat(jEditHome.getPath()));
 
 		AntTask.delDir(jEditHome); // 移除舊資料夾
 		AntTask.unzipFile(jEditHome, filePackage); // 解壓縮
@@ -213,7 +211,7 @@ public class LoaderJFrame extends JFrame {
 		File fileLesson = new File(diskRoot, lessonPath);
 		File fileLessonXml = new File(fileLesson.getParent(), lessonFile);
 
-		msg.print("Download XML [" + lessonFile + "]: ");
+		msg.println("Download XML [" + lessonFile + "]: ");
 
 		HttpDownloaderRunnable run;
 		run = new HttpDownloaderRunnable(urlLesson, fileLessonXml, true);
@@ -227,80 +225,5 @@ public class LoaderJFrame extends JFrame {
 		}
 
 		msg.update(String.valueOf(fileLessonXml.length() / 1204) + " Kbytes");
-	}
-}
-
-class JEditExistsException extends Exception {
-	private static final long serialVersionUID = 339216594956472283L;
-
-	public JEditExistsException() {
-		super("ERROR: Close the exist editor and try again.");
-	}
-}
-
-class Message {
-	private JList listComp;
-	private DefaultListModel listModel;
-
-	private String last;
-	private String temp;
-
-	public Message(DefaultListModel listModel, JList listComp) {
-		this.listModel = listModel;
-		this.listComp = listComp;
-	}
-
-	public void print(String text) {
-		last = temp = text;
-		listModel.addElement(text);
-	}
-
-	public void update(String text) {
-		if (!temp.equals(last + text)) {
-			listComp.clearSelection();
-			listModel.remove(listModel.getSize() - 1);
-			listModel.addElement(temp = last + text);
-		}
-	}
-}
-
-class Checksum {
-	private static byte[] createChecksum(String filename) throws Exception {
-		InputStream fis = new FileInputStream(filename);
-
-		byte[] buffer = new byte[1024];
-		MessageDigest complete = MessageDigest.getInstance("SHA");
-		int numRead;
-		do {
-			numRead = fis.read(buffer);
-			if (numRead > 0) {
-				complete.update(buffer, 0, numRead);
-			}
-		} while (numRead != -1);
-		fis.close();
-		return complete.digest();
-	}
-
-	// see this How-to for a faster way to convert a byte array to
-	// a HEX string
-	public static String md5(String filename) throws Exception {
-		byte[] b = createChecksum(filename);
-		String result = "";
-		for (int i = 0; i < b.length; i++) {
-			result += Integer.toString((b[i] & 0xff) + 0x100, 16).substring(1);
-		}
-		return result;
-	}
-}
-
-class MessageListModel extends DefaultListModel {
-	private static final long serialVersionUID = -4987910955258369973L;
-
-	public synchronized Object getElementAt(int index) {
-		int size = getSize() - 1;
-		if (index >= size) {
-			index = size;
-		}
-		return elementAt(index);
 	}
 }
