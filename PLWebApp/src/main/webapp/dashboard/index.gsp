@@ -29,6 +29,7 @@
 	<div class="page-wrapper">
 		<div class="header">
 			<a href="${helper.basehref}dashboard/" id="logo"><img class="plweb-logo" src="${helper.basehref}img/plweb_logo.png" alt="PLWeb Logo" /></a>
+			<% if(helper.attr('uid')) { %>
 			<div class="topnav">
 				<div class="topLinks">
 					<span><%=helper.sess('uname')%>(<%=helper.sess('uemail')%>)</span>
@@ -50,7 +51,7 @@
 				<div class="formLinks">
 					<ul>
 						<li>
-							<span><a href="${response.encodeUrl('dashboard/index.groovy')}" class="link-item">我的課程</a></span>
+							<span><a href="${response.encodeUrl('/dashboard/')}" class="link-item">我的課程</a></span>
 						</li>
 						<li>
 							<span><a href="${helper.basehref}class/index.groovy" class="link-item embedded-link" target="_blank">課程管理</a></span>
@@ -64,6 +65,7 @@
 					</ul>
 				</div>
 			</div>
+			<% } %>
 		</div>
 		<div class="content-wrapper">
 			<div class="content-left"><div class="content-left-inner">

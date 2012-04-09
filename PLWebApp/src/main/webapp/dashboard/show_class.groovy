@@ -9,6 +9,11 @@ def sql = new Sql(helper.connection)
 def uid		= helper.sess('uid')
 def utype	= helper.sess('utype')
 
+if (!uid) {
+	println """權限不足，請重新<a href=\"${helper.basehref}login/\">登入</a>。"""
+	return
+}
+
 def class_id = helper.fetch_keep('c')
 
 def course_id	= null
@@ -132,16 +137,36 @@ html.div(class: 'showClass') {
 		a (href: "/dashboard/edithtml.groovy?c=${the_class.CLASS_ID}", style: 'float:right', class: 'embedded-link', '編輯內容')
 	}
 	div (class: 'prettyhtml') {
-		mkp.yieldUnescaped (the_class.HTML_TEXT)
+		if (the_class.HTML_TEXT) {
+			mkp.yieldUnescaped (the_class.HTML_TEXT)
+		}
+		else {
+			p ('無內容！')
+		}
 	}
 	h2 ('教學單元')
 	ol (class: 'lesson-menu') {
 		sql.eachRow(_SQL_LESSON_LIST, [class_id]) {
 			lesson->
-			li {
-				href = response.encodeUrl("dashboard/index.groovy?m=show_lesson&c=${class_id}&l=${lesson.COURSE_ID},${lesson.LESSON_ID}")
-				a (class: 'lesson-title', href: href, lesson.TITLE)
-				span (class: 'courseTitle', lesson.COURSE_TITLE)
+			if (lesson.BEGINDATE) {
+				li {
+					href = response.encodeUrl("/content/${class_id}/${lesson.COURSE_ID}/${lesson.LESSON_ID}/")
+					a (class: 'lesson-title', href: href, lesson.TITLE)
+					span (class: 'courseTitle', lesson.COURSE_TITLE)
+				}
+			}
+			else if (is_teacher) {
+				li {
+					href = response.encodeUrl("/content/${class_id}/${lesson.COURSE_ID}/${lesson.LESSON_ID}/")
+					a (class: 'lesson-title-preview', href: href, lesson.TITLE)
+					span (class: 'courseTitle', lesson.COURSE_TITLE)
+				}
+			}
+			else {
+				li {
+					span (class: 'lesson-title-preview', lesson.TITLE)
+					span (class: 'courseTitle', lesson.COURSE_TITLE)
+				}
 			}
 		}
 	}

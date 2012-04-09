@@ -14,8 +14,8 @@ def uid		= helper.sess('uid')
 def utype	= helper.sess('utype')
 
 if (!uid) {
-	response.sendError 403
-	return
+	//response.sendError 403
+	//return
 }
 
 // 取得表單資料
@@ -47,7 +47,7 @@ sql.eachRow(_SQL_CLASS_LIST, [uid]) {
 		school: row.SCHOOL,
 		dept: row.DEPARTMENT,
 		year: row.YEARS,
-		href: response.encodeUrl("dashboard/index.groovy?m=show_class&c=${row.CLASS_ID}")
+		href: response.encodeUrl("/classroom/${row.CLASS_ID}/")
 	]
 }
 
@@ -67,6 +67,7 @@ and IS_LOGIN='y'
 catch (e) {
 }
 
+helper.attr 'uid', uid
 helper.attr 'admin_url', helper.make_url('admin.system/entry.groovy', [], true)
 helper.attr 'is_admin', helper.sess('is_admin')
 helper.attr 'ucount', ucount

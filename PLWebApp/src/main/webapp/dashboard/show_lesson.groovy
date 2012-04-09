@@ -11,6 +11,12 @@ helper = new CommonHelper(request, response, session)
 uid		= helper.sess('uid')
 utype	= helper.sess('utype')
 
+if (!uid) {
+	println """權限不足，請重新<a href=\"${helper.basehref}login/\">登入</a>。"""
+	return
+}
+
+
 class_id		= helper.fetch('c')
 panel_lesson_id	= helper.fetch('l')
 
@@ -35,7 +41,7 @@ row = sql.firstRow("""
 """, [uid, class_id])
 
 if (!row) {
-	println "no permission"
+	println "您尚未參與本課程。"
 	return
 }
 

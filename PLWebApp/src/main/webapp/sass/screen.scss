@@ -160,9 +160,9 @@ td.right, th.right {
 		margin-top: 1em;
 	}
 
-	ol {
-		list-style: decimal outside;
-	}
+	ol, ul { margin-left: 2em; }
+	ol { list-style: decimal outside; }
+	ul { list-style: disc outside; }
 
 	a {
 		color: #0000FF;
@@ -196,13 +196,18 @@ td.right, th.right {
 	.lesson-menu {
 		margin-left: 2em;
 		line-height: 2em;
-		font-size: 0.875em;
+		font-size: 0.75em;
 		color: #A8A8A8;
 	}
 	.lesson-title {
 		color: #063E72;
 		font-weight: bold;
-		font-size: 1.125em;
+		font-size: 1.25em;
+	}
+	.lesson-title-preview {
+		color: #A8A8A8;
+		font-weight: bold;
+		font-size: 1.25em;
 	}
 
 	.content-footer {
