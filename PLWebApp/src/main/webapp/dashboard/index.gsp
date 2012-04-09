@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<title>我的課程 - PLWeb 程式設計練習系統 v2.0</title>
+	<title>我的課程 - PLWeb 程式設計練習系統</title>
 
 	<!-- Compass -->
 	<link href="${helper.basehref}stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -12,7 +12,6 @@
 	<!--[if IE]>
 	<link href="${helper.basehref}stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
 	<![endif]-->
-
 	${helper.htmlhead()}
 	<link rel="stylesheet" type="text/css" media="screen" href="${helper.basehref}css/jquery.tipsy.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="${helper.basehref}css/colorbox-style1/colorbox.css" />
@@ -74,7 +73,7 @@
 				<ul class="classMenu">
 					<%helper.attr('classes').each{row->%>
 					<li>
-						<a href="${row.href}" title="${row.year} / ${row.school} / ${row.dept}" class="<%=row.selected?'selected':''%>">
+						<a href="${row.href}" title="${row.year} / ${row.school} / ${row.dept}" class="<%=row.selected?'selected':''%>" style="color:#063E72;font-weight:bold">
 							${row.name} 
 						</a>
 						<div class="classId">${helper.fetch('secret')==null?row.id:'0000000000'}</div>

@@ -113,23 +113,23 @@ if (row) {
 	exam_type = row.SEMESTER.equals(5)
 }
 
-
-// query COURSE_FILE.HTML_TEXT
+// query CLASS_COURSE.HTML_TEXT
 row = sql.firstRow("""
-	select HTML_TEXT
-	from COURSE_FILE
-	where COURSE_ID=?
+	select TITLE, HTML_TEXT
+	from CLASS_COURSE
+	where CLASS_ID=?
+	and COURSE_ID=?
 	and LESSON_ID=?
-""", [course_id, lesson_id]);
+""", [class_id, course_id, lesson_id]);
 
 if (row.HTML_TEXT) {
 	html_text = row.HTML_TEXT
 }
 else {
-	html_text = """
-	<p>教材內容未設定！</p>
-	"""
+	html_text = "<p>教材內容未設定！</p>"
 }
+
+helper.attr 'title', row.TITLE
 
 //html_content = "no contents"
 //html_content = helper.http_fetch('http://wiki.plweb.org/index.php?title=Scheme/Activate_Thinking_in_Scheme/Chapter01&action=render')
@@ -137,6 +137,9 @@ else {
 helper.attr 'html_text',	html_text
 helper.attr 'report_url',	"${helper.basehref}panel.lesson/classroom_report.groovy?class_id=${class_id}&course_id=${course_id}&lesson_id=${lesson_id}"
 helper.attr 'date_url',		"${helper.basehref}panel.lesson/classroom_date.groovy?class_id=${class_id}"
+helper.attr 'edithtml_url', "${helper.basehref}dashboard/edithtml.groovy?c=${class_id}&l=${course_id},${lesson_id}"
+
+helper.attr 'disqus_identifier', "comments-${class_id}-${course_id}-${lesson_id}"
 
 helper.attr 'allow_editor',	allow_editor
 helper.attr 'editor_url',	editor_url
@@ -156,7 +159,6 @@ helper.attr 'exam_type',	exam_type
 helper.attr 'class_id',		class_id
 helper.attr 'course_id',	course_id
 helper.attr 'lesson_id',	lesson_id
-
 
 helper.attr 'is_teacher',		is_teacher
 helper.attr 'is_show_answer',	is_show_answer

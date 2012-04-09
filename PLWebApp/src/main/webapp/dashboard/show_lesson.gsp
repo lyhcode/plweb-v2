@@ -2,8 +2,7 @@
 <input type="hidden" name="module" value="show_lesson" />
 <div class="panel-lesson-show-lesson">
 
-	<div class="lesson-toolbar">
-	</div>
+	<h2>${helper.attr('title')}</h2>
 	
 	<div class="lesson-toolbar">
 		<div class="lesson-toolbar-date" style="font-size: 13px; line-height: 1.6em; padding: 10px">
@@ -18,10 +17,10 @@
 				止
 			</div>
 			
-			<%if(helper.attr('close_date')){%>
+			<!--<%if(helper.attr('close_date')){%>
 			<a href="${helper.attr('date_url')}" target="_blank"><img src="icon-16/calendar.png" alt="date" border="0" /></a>
 			編輯器開放至 ${helper.attr('close_date')} ${helper.attr('close_time')}
-			<%}%>
+			<%}%>-->
 		</div>
 
 		<div class="lesson-toolbar-control">
@@ -53,11 +52,26 @@
 		</div>
 	</div>
 	
-	<h2>學習狀態</h2>
+	<h3>學習狀態</h3>
 	<div class="lesson-state-panel" style="width:560px;height:160px;margin:5px;">
 		<div class="html-lesson-state"><img src="img/ajax-loader-1.gif"/></div>
 	</div>
 
+	<h3>教材內容</h3>
+	<%if (helper.attr('is_teacher')) {%>
+		<a href="${helper.attr('edithtml_url')}" class="embedded-link" style="float:right">編輯內容</a>
+	<%}%>
 	<div class="html-content-string"><div class="prettyhtml">${helper.attr('html_text')}</div></div>
 
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'myplweb';
+	    var disqus_identifier = '${helper.attr('disqus_identifier')}';
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>

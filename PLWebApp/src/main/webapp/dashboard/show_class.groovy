@@ -116,7 +116,6 @@ html.div(class: 'showClass') {
 				}
 			}
 		}
-		
 		tr {
 			th ('學習狀態')
 			td {
@@ -127,13 +126,21 @@ html.div(class: 'showClass') {
 			}
 		}
 	}
-	
+
+	h2 ('課程大綱')
+	if (is_teacher) {
+		a (href: "/dashboard/edithtml.groovy?c=${the_class.CLASS_ID}", style: 'float:right', class: 'embedded-link', '編輯內容')
+	}
+	div (class: 'prettyhtml') {
+		mkp.yieldUnescaped (the_class.HTML_TEXT)
+	}
 	h2 ('教學單元')
-	ol (class: 'lessonMenu') {
+	ol (class: 'lesson-menu') {
 		sql.eachRow(_SQL_LESSON_LIST, [class_id]) {
 			lesson->
 			li {
-				a (class: 'lessonTitle', href: response.encodeUrl("dashboard/index.groovy?m=show_lesson&c=${class_id}&l=${lesson.COURSE_ID},${lesson.LESSON_ID}"), lesson.TITLE)
+				href = response.encodeUrl("dashboard/index.groovy?m=show_lesson&c=${class_id}&l=${lesson.COURSE_ID},${lesson.LESSON_ID}")
+				a (class: 'lesson-title', href: href, lesson.TITLE)
 				span (class: 'courseTitle', lesson.COURSE_TITLE)
 			}
 		}

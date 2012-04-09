@@ -43,10 +43,12 @@ a {
 
 .fancy-button {
 	@include fancy-button(#124c89, 16px, 10px, 1px);
+	color: white;
 }
 
 .fancy-button-gray {
 	@include fancy-button(#eeeeee, 16px, 10px, 1px);
+	color: black;
 }
 
 td.center, th.center {
@@ -147,15 +149,27 @@ td.right, th.right {
 
 	h2 {
 		@include single-text-shadow(#cccccc, 2px, 2px, 2px);
-		font-size: 1.8em;
+		font-size: 1.6em;
 		line-height: 2em;
 	}
 
 	h3 {
 		@include single-text-shadow(#cccccc, 2px, 2px, 2px);
-		font-size: 1.5em;
+		font-size: 1.25em;
 		line-height: 1.8em;
+		margin-top: 1em;
 	}
+
+	ol {
+		list-style: decimal outside;
+	}
+
+	a {
+		color: #0000FF;
+	}
+
+	em {font-style: italic;}
+	strong, b {font-weight: bold;}
 
 	.content-wrapper {
 		padding:0;
@@ -177,6 +191,18 @@ td.right, th.right {
 
 	.content-center-inner {
 	    	padding: 30px 30px 30px 0;
+	}
+
+	.lesson-menu {
+		margin-left: 2em;
+		line-height: 2em;
+		font-size: 0.875em;
+		color: #A8A8A8;
+	}
+	.lesson-title {
+		color: #063E72;
+		font-weight: bold;
+		font-size: 1.125em;
 	}
 
 	.content-footer {
@@ -783,4 +809,63 @@ td.right, th.right {
 	.book-catalog-other {
 		display: none;
 	}
+}
+
+.prettyhtml {
+	font-size: 15px;
+	color: #333333;
+}
+
+.prettyhtml p {
+	line-height: 1.8em;
+}
+
+.prettyhtml code, .prettyhtml pre {
+	color: #000000;
+	font-size: 13px;
+	line-height: 1.4em;
+	background-color: #f6f6f6;
+	font-family: Courier, 'Courier New', monospace;
+	padding: 2px;
+	border-top: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
+	overflow: auto;
+}
+
+.prettyhtml {
+	line-height: 1.5em;
+
+	li {
+		line-height: 1.25em;
+	}
+
+	img {
+		border:0;
+	}
+
+	a {
+		color: #0000ff;
+		text-decoration: none;
+	}
+
+	h1 {
+		font-size: 1.8em;
+		font-weight: bold;
+		margin-bottom: .4em;
+	}
+
+	h2 {
+		font-size: 1.4em;
+		font-weight: bold;
+		margin-top: .8em;
+		margin-bottom: .2em;
+	}
+}
+
+a.fancy-button {
+	color: white;
+}
+
+a.fancy-button-gray {
+	color: black;
 }
