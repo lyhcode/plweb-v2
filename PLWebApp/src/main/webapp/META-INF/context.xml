@@ -7,7 +7,7 @@
       username="sta"
       password="stastasta"
       driverClassName="com.mysql.jdbc.Driver"
-      url="jdbc:mysql://db.plweb.org/plweb?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;autoReconnectForPools=true"
+      url="jdbc:mysql://localhost/plweb?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;autoReconnectForPools=true"
       testOnBorrow="true"
       testOnReturn="true"
       validationQuery="SELECT 1"

@@ -88,6 +88,10 @@ public class CompilerUserInterface extends JPanel implements ActionListener {
 		}
 		tb2.add(comboMode = createComboBox(modes, "mode.select"));
 		tb2.add(new JToolBar.Separator());
+		
+		tb2.add(createButton("還原原始程式碼", "reset.png",
+				"task.reset"));
+		
 		tb2.add(createButton("reload exercise", "arrow_refresh.png",
 				"task.reload"));
 
@@ -156,7 +160,7 @@ public class CompilerUserInterface extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		System.err.println(cmd);
+		System.out.println("Action Performed: ".concat(cmd));
 		if (cmd.equals("task.select")) {
 			reloadTask();
 		} else if (cmd.equals("explorer.open")) {
@@ -197,6 +201,32 @@ public class CompilerUserInterface extends JPanel implements ActionListener {
 			new FrameProjectEditor(env.getActiveProject());
 		} else if (cmd.equals("html.edit")) {
 			html();
+		} else if (cmd.equals("task.reset")) {
+			//從 .part 載入
+			int idx = comboTask.getSelectedIndex();
+			if (idx >= 0) {
+				XProject project = env.getActiveProject();
+				XTask task = project.getTasks().get(idx);
+				if (task != null) {
+					String fileMain = project.getTaskPropertyEx(task, "file.main");
+					String filePart = project.getTaskPropertyEx(task, "file.part");
+					if (fileMain != null) {
+						
+						String rootPath = project.getRootPath();
+						
+						String filePath = new File(rootPath, fileMain).getPath();
+						Buffer buffer = jEdit.getBuffer(filePath);
+						buffer.remove(0, buffer.getLength());
+						
+						String filePathSrc = new File(rootPath, filePart).getPath();
+						
+						if (new File(filePathSrc).exists()) {
+							String content = TextfileUtilities.readText(filePathSrc);
+							buffer.insert(0, content);
+						}
+					}
+				}
+			}
 		}
 	}
 

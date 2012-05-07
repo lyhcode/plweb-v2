@@ -241,7 +241,8 @@ and PATH=?
 
 		break;
 	case 'saveProject':
-		content = new String(request.getParameter('content').getBytes('ISO8859-1'), 'UTF-8')
+		//content = new String(request.getParameter('content').getBytes('ISO8859-1'), 'UTF-8')
+		content = request.getParameter('content')
 		
 		ByteArrayInputStream is = new ByteArrayInputStream(content.getBytes('UTF-8'))
 		project = XmlFactory.readProject(is);

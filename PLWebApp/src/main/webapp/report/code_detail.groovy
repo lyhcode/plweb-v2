@@ -44,8 +44,16 @@ html.html {
 				}
 				td {
 					h3 ('Source Code')
-					if (msg.CODE) {
-					textarea(style:'width:640px;height:240px', msg.CODE)
+					
+                    def timestring = ''
+                    if (msg.TIME_UPDATED) {
+                        timestring = new Date(msg.TIME_UPDATED.toLong()).format('yyyy-MM-dd HH:mm:ss')
+                    }
+
+                    p ("記錄時間：${timestring}")
+ 
+                    if (msg.CODE) {
+					    textarea(style:'width:640px;height:240px', msg.CODE)
 					}
 					else {
 						p('查無程式碼')
