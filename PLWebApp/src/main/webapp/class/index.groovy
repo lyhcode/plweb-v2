@@ -156,7 +156,10 @@ html.html {
 							span(row.class_id)
 						}
 					}
-					td (row.class_name)
+					td {
+                        span (row.class_name)
+                        a (href: response.encodeUrl("/classroom/${row.class_id}/"), target: '_top', '»')
+                    }
 					td (class: 'small', "${row.school} / ${row.department}")
 					td (class: 'small') {
 						span (style: 'font-family:Georgia', row.years)
