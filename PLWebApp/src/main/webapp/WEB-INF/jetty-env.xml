@@ -8,7 +8,7 @@
         <Arg>
            <New class="org.apache.commons.dbcp.BasicDataSource">
                <Set name="driverClassName">com.mysql.jdbc.Driver</Set>
-               <Set name="url">jdbc:mysql://plweb.org/plweb?useUnicode=true&amp;characterEncoding=UTF-8</Set>
+               <Set name="url">jdbc:mysql://oradb2.plweb.org/plweb?useUnicode=true&amp;characterEncoding=UTF-8</Set>
                <Set name="username">plweb</Set>
                <Set name="password">hGXpMdpZ9KR28d5H</Set>
            </New>
