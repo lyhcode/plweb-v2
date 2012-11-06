@@ -88,7 +88,15 @@ editor_url = helper.make_url('webstart.groovy', [mode: 'student', course_id: cou
 
 //EXCEL WS HACK
 if (course_id=='206') { 
-    editor_url = helper.make_url('http://140.125.251.188:8080/webstart.php', [mode: 'student', course_id: course_id, lesson_id: lesson_id, class_id: class_id, user_id: uid, cdn: true, '_t': new Date().time], false)
+
+def cf_row = sql.firstRow("""
+	select TASKNUM
+    from COURSE_FILE
+	where course_id=?
+	and lesson_id=?
+""", [course_id, lesson_id])
+
+    editor_url = helper.make_url('http://140.125.251.188:8080/webstart.php', [mode: 'student', course_id: course_id, lesson_id: lesson_id, class_id: class_id, user_id: uid, tasknum: cf_row?.TASKNUM, cdn: true, '_t': new Date().time], false)
 }
 
 now = new Date().time
