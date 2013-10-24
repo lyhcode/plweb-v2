@@ -104,25 +104,25 @@ lesson_xml  = "http://${server_host}:${server_port}/ServerLesson.groovy?s=${sess
 request_url = "http://${server_host}:${server_port}/ServerRequest.groovy?s=${session_id}&t=${ticket_no}"
 
 props = [
- 	"plweb.urlpackage"	    : "${codebase}core/jedit-package-4.5.zip",
- 	"plweb.urlpackage_asc"	: new Date().time,
-    "plweb.urllesson"	    : "${lesson_xml}",
- 	"plweb.urlrequest"	    : "${request_url}",
- 	"plweb.lessonpath"	    : "${uid}/${class_id}/${course_name}/${lesson_id}",
- 	"plweb.lessonfile"	    : "lesson${lesson_id}.xml",
- 	"plweb.lessonxml"	    : "${uid}/${class_id}/${course_name}/lesson${lesson_id}.xml",
- 	"plweb.lessonid"	    : "${lesson_id}",
- 	"plweb.lessonmode"	    : "${mode}",
- 	"plweb.jeditpath"	    : "jEdit",
- 	"plweb.pluginpath"	    : "jEdit/workspace/jars",
- 	"plweb.adimage"			: "http://${server_host}:${server_port}/ad-image/plweb-ad.png",
- 	"plweb.adurl"			: "http://${server_host}:${server_port}/",
+ 	"javaws.plweb.urlpackage"	    : "${codebase}core/jedit-package-4.5.zip",
+ 	"javaws.plweb.urlpackage_asc"	: new Date().time,
+    "javaws.plweb.urllesson"	    : "${lesson_xml}",
+ 	"javaws.plweb.urlrequest"	    : "${request_url}",
+ 	"javaws.plweb.lessonpath"	    : "${uid}/${class_id}/${course_name}/${lesson_id}",
+ 	"javaws.plweb.lessonfile"	    : "lesson${lesson_id}.xml",
+ 	"javaws.plweb.lessonxml"	    : "${uid}/${class_id}/${course_name}/lesson${lesson_id}.xml",
+ 	"javaws.plweb.lessonid"	    : "${lesson_id}",
+ 	"javaws.plweb.lessonmode"	    : "${mode}",
+ 	"javaws.plweb.jeditpath"	    : "jEdit",
+ 	"javaws.plweb.pluginpath"	    : "jEdit/workspace/jars",
+ 	"javaws.plweb.adimage"			: "http://${server_host}:${server_port}/ad-image/plweb-ad.png",
+ 	"javaws.plweb.adurl"			: "http://${server_host}:${server_port}/",
  	
- 	"plweb.var.user_id"		: uid,
- 	"plweb.var.user_name"	: uname,
- 	"plweb.var.course_id"	: course_id,
- 	"plweb.var.lesson_id"	: lesson_id,
- 	"plweb.var.class_id"	: class_id,
+ 	"javaws.plweb.var.user_id"		: uid,
+ 	"javaws.plweb.var.user_name"	: uname,
+ 	"javaws.plweb.var.course_id"	: course_id,
+ 	"javaws.plweb.var.lesson_id"	: lesson_id,
+ 	"javaws.plweb.var.class_id"	: class_id,
 
     "file.encoding"         : 'UTF-8',
     "user.language"         : 'zh',
@@ -132,29 +132,29 @@ props = [
 ]
 
 props_windows = [
-	"plweb.diskroot"	    : "C:/myplweb",
-	"plweb.shell"			: "cmd /C",
-	"plweb.explorer"		: "start explorer /root, \${root}"
+	"javaws.plweb.diskroot"	    : "C:/myplweb",
+	"javaws.plweb.shell"			: "cmd /C",
+	"javaws.plweb.explorer"		: "start explorer /root, \${root}"
 ]
 
 props_linux = [
-	"plweb.diskroot"	    : "myplweb",
-	"plweb.shell"			: "bash -c",
-	"plweb.explorer"		: "nautils \${root}"
+	"javaws.plweb.diskroot"	    : "myplweb",
+	"javaws.plweb.shell"			: "bash -c",
+	"javaws.plweb.explorer"		: "nautils \${root}"
 ]
 
 props_mac = [
-    "plweb.diskroot"	    : "myplweb",
-	"plweb.shell"			: "bash -c",
-	"plweb.explorer"		: "nautils \${root}",
+    "javaws.plweb.diskroot"	    : "myplweb",
+	"javaws.plweb.shell"			: "bash -c",
+	"javaws.plweb.explorer"		: "nautils \${root}",
     'sun.awt.disableMixing' : 'true'
 ]
 
 c = 0
 new File(deployPath, 'plugins').eachFileMatch(~/.*\.jar/) {
     file->
-	props.put("plweb.plugins.${c}", "${codebase}plugins/${file.name}")
-	props.put("plweb.plugins_asc.${c}", new Date().time)
+	props.put("javaws.plweb.plugins.${c}", "${codebase}plugins/${file.name}")
+	props.put("javaws.plweb.plugins_asc.${c}", new Date().time)
 	c++
 }
 

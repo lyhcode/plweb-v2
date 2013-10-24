@@ -17,24 +17,24 @@ public class PLWebEnvironment {
 	}
 
 	public PLWebEnvironment() {
-		setDiskRoot(new File(System.getProperty("plweb.diskroot")).getPath());
-		setUrlPackage(System.getProperty("plweb.urlpackage"));
-		setUrlPackageAsc(System.getProperty("plweb.urlpackage_asc"));
-		setUrlLesson(System.getProperty("plweb.urllesson"));
-		setLessonId(System.getProperty("plweb.lessonid"));
-		setLessonPath(System.getProperty("plweb.lessonpath"));
-		setLessonFile(System.getProperty("plweb.lessonfile"));
-		setJEditPath(System.getProperty("plweb.jeditpath"));
-		setPluginPath(System.getProperty("plweb.pluginpath"));
-		setAdImage(System.getProperty("plweb.adimage"));
-		setAdUrl(System.getProperty("plweb.adurl"));
+		setDiskRoot(new File(System.getProperty("javaws.plweb.diskroot")).getPath());
+		setUrlPackage(System.getProperty("javaws.plweb.urlpackage"));
+		setUrlPackageAsc(System.getProperty("javaws.plweb.urlpackage_asc"));
+		setUrlLesson(System.getProperty("javaws.plweb.urllesson"));
+		setLessonId(System.getProperty("javaws.plweb.lessonid"));
+		setLessonPath(System.getProperty("javaws.plweb.lessonpath"));
+		setLessonFile(System.getProperty("javaws.plweb.lessonfile"));
+		setJEditPath(System.getProperty("javaws.plweb.jeditpath"));
+		setPluginPath(System.getProperty("javaws.plweb.pluginpath"));
+		setAdImage(System.getProperty("javaws.plweb.adimage"));
+		setAdUrl(System.getProperty("javaws.plweb.adurl"));
 
 		List<String> plugins = new ArrayList<String>();
 		List<String> pluginsAsc = new ArrayList<String>();
 		for (Object okey : System.getProperties().keySet()) {
 			if (okey instanceof String) {
 				String key = (String) okey;
-				if (key.startsWith("plweb.plugins.")) {
+				if (key.startsWith("javaws.plweb.plugins.")) {
 					plugins.add(System.getProperty(key));
 					pluginsAsc.add(System.getProperty(key.replace(".plugins.",
 							".plugins_asc.")));
